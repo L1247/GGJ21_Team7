@@ -1,17 +1,32 @@
-using System;
 using UnityEngine;
 
 namespace Main
 {
     public class Jump : MonoBehaviour
     {
-        private IInputService _inputService;
+    #region Private Variables
+
         private Actor         _actor;
+        private IInputService _inputService;
+
         [SerializeField]
         private float JumpForce;
 
         [SerializeField]
         private KeyCode jumpKeyCode = KeyCode.Space;
+
+    #endregion
+
+    #region Unity events
+
+        private void Start()
+        {
+            _inputService.RegisterKey(jumpKeyCode);
+        }
+
+    #endregion
+
+    #region Private Methods
 
         private void Awake()
         {
@@ -19,14 +34,11 @@ namespace Main
             _actor        = GetComponent<Actor>();
         }
 
-        private void Start()
-        {
-            _inputService.RegisterKey(jumpKeyCode);
-        }
-
         private void Update()
         {
             if (_inputService.IsKeyDown(jumpKeyCode)) _actor.Jump(JumpForce);
         }
+
+    #endregion
     }
 }

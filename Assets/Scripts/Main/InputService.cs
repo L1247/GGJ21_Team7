@@ -7,7 +7,7 @@ namespace Main
     {
     #region Private Variables
 
-        private List<Key> keycodes = new List<Key>();
+        private readonly List<Key> keycodes = new List<Key>();
 
     #endregion
 
@@ -16,7 +16,7 @@ namespace Main
         public bool IsKeyDown(KeyCode keycode)
         {
             var isKeyDown = false;
-            if (HasKey(keycode , out Key key))
+            if (HasKey(keycode , out var key))
                 isKeyDown = key.KeyDown;
             return isKeyDown;
         }
@@ -25,7 +25,7 @@ namespace Main
         public bool IsKeyUp(KeyCode keycode)
         {
             var isKeyUp = false;
-            if (HasKey(keycode , out Key key))
+            if (HasKey(keycode , out var key))
                 isKeyUp = key.KeyUp;
             return isKeyUp;
         }
@@ -33,7 +33,7 @@ namespace Main
 
         public void RegisterKey(KeyCode keycode)
         {
-            if (HasKey(keycode , out Key key) == false)
+            if (HasKey(keycode , out var key) == false)
             {
                 var newKey = new Key(keycode);
                 keycodes.Add(newKey);
@@ -42,7 +42,7 @@ namespace Main
 
         public void UnRegisterKey(KeyCode keycode)
         {
-            if (HasKey(keycode , out Key key))
+            if (HasKey(keycode , out var key))
                 keycodes.Remove(key);
         }
 
@@ -62,7 +62,7 @@ namespace Main
             foreach (var key in keycodes)
             {
                 key.KeyDown = Input.GetKeyDown(key.KeyCode);
-                key.KeyUp = Input.GetKeyUp(key.KeyCode);
+                key.KeyUp   = Input.GetKeyUp(key.KeyCode);
             }
         }
 
@@ -76,13 +76,16 @@ namespace Main
         public bool KeyDown { get; set; }
         public bool KeyUp   { get; set; }
 
-        public KeyCode KeyCode { get; private set; }
+        public KeyCode KeyCode { get; }
 
     #endregion
 
     #region Constructor
 
-        public Key(KeyCode keycode) => KeyCode = keycode;
+        public Key(KeyCode keycode)
+        {
+            KeyCode = keycode;
+        }
 
     #endregion
     }

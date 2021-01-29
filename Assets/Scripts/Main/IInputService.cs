@@ -4,9 +4,13 @@ namespace Main
 {
     public interface IInputService
     {
-        void RegisterKey(KeyCode keycode);
+    #region Public Methods
+
+        bool IsKeyDown(KeyCode     keycode);
+        bool IsKeyUp(KeyCode       keycode);
+        void RegisterKey(KeyCode   keycode);
         void UnRegisterKey(KeyCode keycode);
-        bool IsKeyDown(KeyCode keycode);
-        bool IsKeyUp(KeyCode  keycode);
+
+    #endregion
     }
 }
