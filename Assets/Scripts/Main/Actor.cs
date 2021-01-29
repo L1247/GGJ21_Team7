@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody2D _rigidbody2D;
+
+    private void Awake()
     {
-        
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void Jump(float jumpForce)
     {
-        
+        _rigidbody2D.AddForce(jumpForce * Vector2.up , ForceMode2D.Impulse);
     }
 }

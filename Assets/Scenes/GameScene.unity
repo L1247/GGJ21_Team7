@@ -218,6 +218,8 @@ GameObject:
   - component: {fileID: 841678084}
   - component: {fileID: 841678087}
   - component: {fileID: 841678085}
+  - component: {fileID: 841678089}
+  - component: {fileID: 841678088}
   m_Layer: 0
   m_Name: Actor
   m_TagString: Untagged
@@ -293,13 +295,39 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &841678088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841678083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52464e505a894199899a37d31ee594d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpForce: 14
+--- !u!114 &841678089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841678083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43b0cc2f41444f8c97dcc35fa367cd92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpKey: 32
 --- !u!1 &882230101
 GameObject:
   m_ObjectHideFlags: 0
