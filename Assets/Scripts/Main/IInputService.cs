@@ -1,12 +1,12 @@
+using UnityEngine;
+
 namespace Main
 {
     public interface IInputService
     {
-        bool IsJumpDown();
-        bool IsJumpUp();
-        bool IsRightArrowDown();
-        bool IsRightArrowUp();
-        bool IsLeftArrowDown();
-        bool IsLeftArrowUp();
+        void RegisterKey(KeyCode keycode);
+        void UnRegisterKey(KeyCode keycode);
+        bool IsKeyDown(KeyCode keycode);
+        bool IsKeyUp(KeyCode  keycode);
     }
 }

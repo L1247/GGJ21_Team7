@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 14
+  jumpKeyCode: 32
 --- !u!114 &841678089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b0cc2f41444f8c97dcc35fa367cd92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpKey: 32
 --- !u!1 &882230101
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,50 +1,88 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Main
 {
     public class InputService : MonoBehaviour , IInputService
     {
-        [SerializeField]
-        private KeyCode JumpKey = KeyCode.Space;
+    #region Private Variables
 
-        private bool _jumpDown;
-        private bool _jumpUp;
+        private List<Key> keycodes = new List<Key>();
+
+    #endregion
 
     #region Public Methods
 
-        public bool IsJumpDown() => _jumpDown;
-        public bool IsJumpUp()   => _jumpUp;
-
-        public bool IsLeftArrowDown()
+        public bool IsKeyDown(KeyCode keycode)
         {
-            throw new NotImplementedException();
+            var isKeyDown = false;
+            if (HasKey(keycode , out Key key))
+                isKeyDown = key.KeyDown;
+            return isKeyDown;
         }
 
-        public bool IsLeftArrowUp()
+
+        public bool IsKeyUp(KeyCode keycode)
         {
-            throw new NotImplementedException();
+            var isKeyUp = false;
+            if (HasKey(keycode , out Key key))
+                isKeyUp = key.KeyUp;
+            return isKeyUp;
         }
 
-        public bool IsRightArrowDown()
+
+        public void RegisterKey(KeyCode keycode)
         {
-            throw new NotImplementedException();
+            if (HasKey(keycode , out Key key) == false)
+            {
+                var newKey = new Key(keycode);
+                keycodes.Add(newKey);
+            }
         }
 
-        public bool IsRightArrowUp()
+        public void UnRegisterKey(KeyCode keycode)
         {
-            throw new NotImplementedException();
+            if (HasKey(keycode , out Key key))
+                keycodes.Remove(key);
         }
 
     #endregion
 
     #region Private Methods
 
+        private bool HasKey(KeyCode keycode , out Key key)
+        {
+            key = keycodes.Find(k => k.KeyCode == keycode);
+            var hasKey = key != null;
+            return hasKey;
+        }
+
         private void Update()
         {
-            _jumpDown = Input.GetKeyDown(JumpKey);
-            _jumpUp   = Input.GetKeyUp(JumpKey);
+            foreach (var key in keycodes)
+            {
+                key.KeyDown = Input.GetKeyDown(key.KeyCode);
+                key.KeyUp = Input.GetKeyUp(key.KeyCode);
+            }
         }
+
+    #endregion
+    }
+
+    internal class Key
+    {
+    #region Public Variables
+
+        public bool KeyDown { get; set; }
+        public bool KeyUp   { get; set; }
+
+        public KeyCode KeyCode { get; private set; }
+
+    #endregion
+
+    #region Constructor
+
+        public Key(KeyCode keycode) => KeyCode = keycode;
 
     #endregion
     }

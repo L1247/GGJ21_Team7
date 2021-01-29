@@ -10,15 +10,23 @@ namespace Main
         [SerializeField]
         private float JumpForce;
 
+        [SerializeField]
+        private KeyCode jumpKeyCode = KeyCode.Space;
+
         private void Awake()
         {
             _inputService = GetComponent<IInputService>();
             _actor        = GetComponent<Actor>();
         }
 
+        private void Start()
+        {
+            _inputService.RegisterKey(jumpKeyCode);
+        }
+
         private void Update()
         {
-            if (_inputService.IsJumpDown()) _actor.Jump(JumpForce);
+            if (_inputService.IsKeyDown(jumpKeyCode)) _actor.Jump(JumpForce);
         }
     }
 }
