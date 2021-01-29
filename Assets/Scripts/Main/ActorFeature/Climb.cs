@@ -11,7 +11,7 @@ namespace Main.ActorFeature
         private IInputService _inputService;
 
         [SerializeField]
-        private float JumpForce;
+        private float MoveSpeed;
 
         [SerializeField]
         private KeyCode climbDownKeyCode = KeyCode.DownArrow;
@@ -44,9 +44,15 @@ namespace Main.ActorFeature
             var isOnLadder = _actor.IsOnLadder();
             if (isOnLadder)
             {
-                // if (_inputService.IsKeyDown(climbUpKeyCode))
-                // _actor.Climb(JumpForce);
-                // if (_inputService.IsKeyDown(climbUpKeyCode))
+                _actor.SetGravitySacleToZero();
+                if (_inputService.IsKeyPress(climbUpKeyCode))
+                    _actor.AddMovementY(MoveSpeed);
+                if (_inputService.IsKeyPress(climbDownKeyCode))
+                    _actor.AddMovementY(-1 * MoveSpeed);
+            }
+            else
+            {
+                _actor.SetGravitySacleToDefault();
             }
         }
 

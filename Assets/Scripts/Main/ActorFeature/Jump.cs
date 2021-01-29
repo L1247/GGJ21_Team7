@@ -39,7 +39,6 @@ namespace Main.ActorFeature
         {
             var isGrounded    = _actor.IsGrounded();
             var isJumpKeyDown = _inputService.IsKeyDown(jumpKeyCode);
-            Debug.Log($"{isGrounded} , {isJumpKeyDown}");
             if (isJumpKeyDown && isGrounded)
                 _actor.Jump(JumpForce);
         }
