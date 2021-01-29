@@ -4,8 +4,16 @@ public class Actor : MonoBehaviour
 {
 #region Private Variables
 
+    private bool _isGrounded;
+
     private Rigidbody2D _rigidbody2D;
     private Vector2     movement;
+
+    [SerializeField]
+    private LayerMask groundLayer;
+
+    [SerializeField]
+    private Transform GroundCheck;
 
 #endregion
 
@@ -14,6 +22,11 @@ public class Actor : MonoBehaviour
     public void AddMovement(Vector2 dir)
     {
         movement += dir;
+    }
+
+    public bool IsGrounded()
+    {
+        return _isGrounded;
     }
 
     public void Jump(float jumpForce)
@@ -30,12 +43,25 @@ public class Actor : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    private void CheckGround()
+    {
+        _isGrounded = Physics2D.OverlapCircle(GroundCheck.position
+                                              , 0.15f , groundLayer);
+    }
+
     private void FixedUpdate()
+    {
+        HandleMovement();
+        CheckGround();
+    }
+
+    private void HandleMovement()
     {
         if (movement.x != 0) MoveActor();
         else SetVelocity(0);
         movement.x = 0;
     }
+
 
     private void MoveActor()
     {

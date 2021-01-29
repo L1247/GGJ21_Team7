@@ -37,7 +37,8 @@ namespace Main.ActorFeature
 
         private void Update()
         {
-            if (_inputService.IsKeyDown(jumpKeyCode)) _actor.Jump(JumpForce);
+            if (_inputService.IsKeyDown(jumpKeyCode) && _actor.IsGrounded())
+                _actor.Jump(JumpForce);
         }
 
     #endregion
