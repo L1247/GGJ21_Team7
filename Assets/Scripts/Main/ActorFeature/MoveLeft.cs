@@ -38,7 +38,7 @@ namespace Main.ActorFeature
         private void Update()
         {
             if (_inputService.IsKeyPress(LeftMoveKeyCode))
-                _actor.AddMovement(Vector2.left * moveSpeed);
+                _actor.AddMovementX(-1 * moveSpeed);
         }
 
     #endregion

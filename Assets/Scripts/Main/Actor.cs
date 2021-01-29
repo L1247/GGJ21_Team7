@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
@@ -19,14 +20,19 @@ public class Actor : MonoBehaviour
 
 #region Public Methods
 
-    public void AddMovement(Vector2 dir)
+    public void AddMovementX(float move)
     {
-        movement += dir;
+        movement += Vector2.right * move;
     }
 
     public bool IsGrounded()
     {
         return _isGrounded;
+    }
+
+    public bool IsOnLadder()
+    {
+        throw new NotImplementedException();
     }
 
     public void Jump(float jumpForce)
@@ -58,7 +64,7 @@ public class Actor : MonoBehaviour
     private void HandleMovement()
     {
         if (movement.x != 0) MoveActor();
-        else SetVelocity(0);
+        else SetVelocityX(0);
         movement.x = 0;
     }
 
@@ -66,14 +72,22 @@ public class Actor : MonoBehaviour
     private void MoveActor()
     {
         var movementX = movement.x;
-        SetVelocity(movementX);
+        SetVelocityX(movementX);
     }
 
-    private void SetVelocity(float movementX)
+    private void SetVelocityX(float movementX)
     {
         var velocity    = _rigidbody2D.velocity;
         var x           = movementX * Time.fixedDeltaTime;
         var newVelocity = new Vector2(x , velocity.y);
+        _rigidbody2D.velocity = newVelocity;
+    }
+
+    private void SetVelocityY(float movementY)
+    {
+        var velocity    = _rigidbody2D.velocity;
+        var y           = movementY * Time.fixedDeltaTime;
+        var newVelocity = new Vector2(velocity.x , y);
         _rigidbody2D.velocity = newVelocity;
     }
 
