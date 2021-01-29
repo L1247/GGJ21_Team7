@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 841678089}
   - component: {fileID: 841678088}
   - component: {fileID: 841678090}
+  - component: {fileID: 841678091}
   m_Layer: 0
   m_Name: Actor
   m_TagString: Untagged
@@ -298,9 +299,9 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bc3ac342451634b49a96d98b94fb381d, type: 2}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &841678088
@@ -341,8 +342,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb85b7f5466a40038ce0164e62748a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 100
   LeftMoveKeyCode: 276
-  moveSpeed: 5
+--- !u!114 &841678091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841678083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4afdb695217fd49b0d94401199117b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 100
+  RightMoveKeyCode: 275
 --- !u!1 &882230101
 GameObject:
   m_ObjectHideFlags: 0

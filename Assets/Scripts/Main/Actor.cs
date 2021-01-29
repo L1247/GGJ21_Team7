@@ -32,19 +32,23 @@ public class Actor : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (movement != Vector2.zero)
-        {
-            MoveActor();
-            movement = Vector2.zero;
-        }
+        if (movement.x != 0) MoveActor();
+        else SetVelocity(0);
+        movement.x = 0;
     }
 
     private void MoveActor()
     {
-        Debug.Log($"{movement}");
-        var velocity = _rigidbody2D.velocity;
-        _rigidbody2D.velocity += new Vector2(movement.x * Time.fixedDeltaTime
-                                             , velocity.y);
+        var movementX = movement.x;
+        SetVelocity(movementX);
+    }
+
+    private void SetVelocity(float movementX)
+    {
+        var velocity    = _rigidbody2D.velocity;
+        var x           = movementX * Time.fixedDeltaTime;
+        var newVelocity = new Vector2(x , velocity.y);
+        _rigidbody2D.velocity = newVelocity;
     }
 
 #endregion
