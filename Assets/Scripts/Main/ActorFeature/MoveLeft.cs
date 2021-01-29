@@ -1,8 +1,9 @@
+using Main.Input;
 using UnityEngine;
 
-namespace Main
+namespace Main.ActorFeature
 {
-    public class Jump : MonoBehaviour
+    public class MoveLeft : MonoBehaviour
     {
     #region Private Variables
 
@@ -10,10 +11,10 @@ namespace Main
         private IInputService _inputService;
 
         [SerializeField]
-        private float JumpForce;
+        private float moveSpeed = 5;
 
         [SerializeField]
-        private KeyCode jumpKeyCode = KeyCode.Space;
+        private KeyCode LeftMoveKeyCode = KeyCode.LeftArrow;
 
     #endregion
 
@@ -21,7 +22,7 @@ namespace Main
 
         private void Start()
         {
-            _inputService.RegisterKey(jumpKeyCode);
+            _inputService.RegisterKey(LeftMoveKeyCode);
         }
 
     #endregion
@@ -36,7 +37,8 @@ namespace Main
 
         private void Update()
         {
-            if (_inputService.IsKeyDown(jumpKeyCode)) _actor.Jump(JumpForce);
+            if (_inputService.IsKeyPress(LeftMoveKeyCode))
+                _actor.AddMovement(Vector2.left * moveSpeed);
         }
 
     #endregion

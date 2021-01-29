@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Main
+namespace Main.Input
 {
     public class InputService : MonoBehaviour , IInputService
     {
@@ -19,6 +19,14 @@ namespace Main
             if (HasKey(keycode , out var key))
                 isKeyDown = key.KeyDown;
             return isKeyDown;
+        }
+
+        public bool IsKeyPress(KeyCode keycode)
+        {
+            var isKeyPress = false;
+            if (HasKey(keycode , out var key))
+                isKeyPress = key.KeyPress;
+            return isKeyPress;
         }
 
 
@@ -61,8 +69,9 @@ namespace Main
         {
             foreach (var key in keycodes)
             {
-                key.KeyDown = Input.GetKeyDown(key.KeyCode);
-                key.KeyUp   = Input.GetKeyUp(key.KeyCode);
+                key.KeyPress = UnityEngine.Input.GetKey(key.KeyCode);
+                key.KeyDown  = UnityEngine.Input.GetKeyDown(key.KeyCode);
+                key.KeyUp    = UnityEngine.Input.GetKeyUp(key.KeyCode);
             }
         }
 
@@ -73,8 +82,9 @@ namespace Main
     {
     #region Public Variables
 
-        public bool KeyDown { get; set; }
-        public bool KeyUp   { get; set; }
+        public bool KeyDown  { get; set; }
+        public bool KeyPress { get; set; }
+        public bool KeyUp    { get; set; }
 
         public KeyCode KeyCode { get; }
 
