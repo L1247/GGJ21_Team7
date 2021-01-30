@@ -47,7 +47,15 @@ public class InputManager : MonoBehaviour
             transform.localPosition += new Vector3(0, Time.deltaTime * player.runSpeed, 0);
             if (player.GetAnimator)
             {
-                animator.SetTrigger("Climb");
+                if (!player.GetBackgroundColor)
+                {
+                    animator.SetTrigger("Climb");
+                }
+                else
+                {
+                    animator.SetTrigger("Climb_C");
+                }
+
             }
         }
 
