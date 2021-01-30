@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     [Header("行動參數")]
-    [SerializeField] private int whitchSceneToLoad;
+    [SerializeField] private int whichSceneToLoad;
     public float jumpForce;
     public float runSpeed;
     [SerializeField] private float hitBackForce;
@@ -463,7 +463,7 @@ public class Player : MonoBehaviour
 
             if (GetRestart)
             {
-                StartCoroutine(BackTo(whitchSceneToLoad));
+                StartCoroutine(BackTo(whichSceneToLoad));
             }
             else
             {
@@ -491,7 +491,7 @@ public class Player : MonoBehaviour
 
     IEnumerator BackTo(int index)
     {
-        index = whitchSceneToLoad;
+        index = whichSceneToLoad;
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(index);
     }
