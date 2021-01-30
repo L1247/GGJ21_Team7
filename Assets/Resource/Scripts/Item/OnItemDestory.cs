@@ -13,7 +13,10 @@ public class OnItemDestory : MonoBehaviour
     {
         foreach (var activateObject in activateObjects)
         {
-           activateObject.SetActive(true);
+            if (activateObject != null)
+            {
+                activateObject.SetActive(true);
+            }
         }
     }
 }
