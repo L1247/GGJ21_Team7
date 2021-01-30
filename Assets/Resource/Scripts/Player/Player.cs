@@ -33,6 +33,11 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject leftKey;
     [SerializeField] private GameObject spaceKey;
 
+    [Header("獲得道具UI")]
+    [SerializeField] private GameObject audioIcon;
+    [SerializeField] private GameObject restartIcon;
+    [SerializeField] private GameObject flashLightIcon;
+
     [Header("血條UI")]
     [SerializeField] private Image[] healthStars;
 
@@ -45,6 +50,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] rightSprite;
     [SerializeField] private Sprite[] leftSprite;
     [SerializeField] private Sprite[] spaceSprite;
+    [SerializeField] private Sprite[] audioSprite;
+    [SerializeField] private Sprite[] restartSprite;
+    [SerializeField] private Sprite[] flashLightSprite;
     [SerializeField] private Sprite[] healthStar;
 
 
@@ -109,7 +117,7 @@ public class Player : MonoBehaviour
         set => getRestart = value;
     }
 
-    private bool getLight;
+    [SerializeField] private bool getLight;
 
 
     public bool GetLight
@@ -148,11 +156,15 @@ public class Player : MonoBehaviour
         GetBackgroundColor = true;
         GetAudio = true;
         GetRestart = true;
-        rightKey.SetActive(true);
-        upKey.SetActive(true);
-        downKey.SetActive(true);
-        leftKey.SetActive(true);
-        spaceKey.SetActive(true);
+        GetLight = true;
+        // rightKey.SetActive(true);
+        // upKey.SetActive(true);
+        // downKey.SetActive(true);
+        // leftKey.SetActive(true);
+        // spaceKey.SetActive(true);
+        // audioIcon.SetActive(true);
+        // restartIcon.SetActive(true);
+        // flashLightIcon.SetActive(true);
     }
 
     private void NoPowerPlayer()
@@ -162,10 +174,14 @@ public class Player : MonoBehaviour
         transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[0];
         background.sprite = backgroundSprite[0];
         rightKey.SetActive(true);
-        upKey.SetActive(false);
-        downKey.SetActive(false);
-        leftKey.SetActive(false);
-        spaceKey.SetActive(false);
+        LeftKey = false;
+        Jump = false;
+        Climb = false;
+        GetRestart = false;
+        GetBackgroundColor = false;
+        GetAudio = false;
+        GetLight=false;
+
     }
 
     // Update is called once per frame
@@ -174,60 +190,69 @@ public class Player : MonoBehaviour
         if (!GetBackgroundColor)
         {
             rightKey.GetComponent<Image>().sprite = rightSprite[0];
+            if (SceneManager.GetActiveScene().buildIndex==1)
+            {
+                background.sprite = backgroundSprite[0];
+            }
+            else
+            {
+                background.sprite = backgroundSprite[2];
+            }
+
         }
         else
         {
             rightKey.GetComponent<Image>().sprite = rightSprite[1];
+            if (SceneManager.GetActiveScene().buildIndex==1)
+            {
+                background.sprite = backgroundSprite[1];
+            }
+            else
+            {
+                background.sprite = backgroundSprite[2];
+            }
         }
-        if (getLeftKey && !GetBackgroundColor)
+
+        if (getLeftKey)
         {
             leftKey.SetActive(true);
-            leftKey.GetComponent<Image>().sprite = leftSprite[0];
-        }
-        else if(getLeftKey && GetBackgroundColor)
-        {
-            leftKey.SetActive(true);
-            leftKey.GetComponent<Image>().sprite = leftSprite[1];
+            leftKey.GetComponent<Image>().sprite = !GetBackgroundColor ? leftSprite[0] : leftSprite[1];
         }
         else
         {
             leftKey.SetActive(false);
         }
 
-        if (Climb && !GetBackgroundColor)
-        {
-            upKey.SetActive(true);
-            upKey.GetComponent<Image>().sprite = upSprite[0];
-            downKey.SetActive(true);
-            downKey.GetComponent<Image>().sprite = downSprite[0];
 
+
+        if (Jump)
+        {
+            spaceKey.SetActive(true);
+            spaceKey.GetComponent<Image>().sprite = !GetBackgroundColor ? spaceSprite[0] : spaceSprite[1];
         }
-        else if (Climb && GetBackgroundColor)
+        else
+        {
+            spaceKey.SetActive(false);
+        }
+        if (Climb)
         {
             upKey.SetActive(true);
-            upKey.GetComponent<Image>().sprite = upSprite[1];
             downKey.SetActive(true);
-            downKey.GetComponent<Image>().sprite = downSprite[1];
+            if (!GetBackgroundColor)
+            {
+                upKey.GetComponent<Image>().sprite = upSprite[0];
+                downKey.GetComponent<Image>().sprite = downSprite[0];
+            }
+            else
+            {
+                upKey.GetComponent<Image>().sprite = upSprite[1];
+                downKey.GetComponent<Image>().sprite = downSprite[1];
+            }
         }
         else
         {
             upKey.SetActive(false);
             downKey.SetActive(false);
-        }
-
-        if (Jump && !GetBackgroundColor)
-        {
-            spaceKey.SetActive(true);
-            spaceKey.GetComponent<Image>().sprite = spaceSprite[0];
-        }
-        else if (Jump && GetBackgroundColor)
-        {
-            spaceKey.SetActive(true);
-            spaceKey.GetComponent<Image>().sprite = spaceSprite[1];
-        }
-        else
-        {
-            spaceKey.SetActive(false);
         }
 
         if (isClimbing)
@@ -238,6 +263,40 @@ public class Player : MonoBehaviour
         else
         {
             _rigidbody2D.gravityScale=3;
+        }
+
+        if (GetAudio)
+        {
+            audioIcon.SetActive(true);
+            sfxSource.enabled = true;
+            audioManager.enabled = true;
+            audioIcon.GetComponent<Image>().sprite = !GetBackgroundColor ? audioSprite[0] : audioSprite[1];
+        }
+        else
+        {
+            audioIcon.SetActive(false);
+            sfxSource.enabled = false;
+            audioManager.enabled = false;
+        }
+
+        if (GetRestart)
+        {
+            restartIcon.SetActive(true);
+            restartIcon.GetComponent<Image>().sprite = !GetBackgroundColor ? restartSprite[0] : restartSprite[1];
+        }
+        else
+        {
+            restartIcon.SetActive(false);
+        }
+
+        if (GetLight)
+        {
+            flashLightIcon.SetActive(true);
+            flashLightIcon.GetComponent<Image>().sprite = !GetBackgroundColor ? flashLightSprite[0] : flashLightSprite[1];
+        }
+        else
+        {
+            flashLightIcon.SetActive(false);
         }
     }
 
@@ -285,8 +344,6 @@ public class Player : MonoBehaviour
                 case ItemType.Audio:
                     GetAudio = true;
                     print("GetSound");
-                    sfxSource.enabled = true;
-                    audioManager.enabled = true;
                     audioManager.volume = 0.5f;
                     audioManager.Play();
                     Destroy(other.gameObject);
@@ -296,7 +353,6 @@ public class Player : MonoBehaviour
                     GetComponent<Animator>().SetTrigger("Idle_C");
                     print("GetColor");
                     // transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[1];
-                    background.sprite = backgroundSprite[1];
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Light:
@@ -311,11 +367,12 @@ public class Player : MonoBehaviour
                     break;
                 case ItemType.Teleport :
                     print("Teleport to : "+ nextLevelPosition.position);
-                    // TeleportToNextLevel();
+                   // TeleportToNextLevel();
+                    Destroy(other.gameObject);
                     break;
                 case ItemType.Icon:
 
-                    WinGame();
+                    Destroy(other.gameObject);
                     break;
                 default:
                     break;

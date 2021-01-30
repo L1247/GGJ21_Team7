@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            
+
         }
     }
 
@@ -113,7 +113,6 @@ public class InputManager : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
             if (player.GetAnimator)
             {
-                print(player.GetAnimator);
                 if (!player.GetBackgroundColor)
                 {
                     animator.SetTrigger("Run");
