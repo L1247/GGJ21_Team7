@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
             if (Climb && !isClimbing)
             {
                 print("Climbing");
-                transform.position = other.transform.position;
+                // transform.position = other.transform.position;
                 isClimbing = true;
                 // _rigidbody2D.velocity = new Vector2(0, jumpForce / 2);
             }
@@ -343,7 +343,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
 
         }
