@@ -23,14 +23,19 @@ public class InputManager : MonoBehaviour
                 GoLeft();
             }
 
-            if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow) && !player.GetBackgroundColor)
+            if (player.GetAnimator)
             {
-                animator.SetTrigger("Idle");
-            }
-
-            if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow) && player.GetBackgroundColor)
-            {
-                animator.SetTrigger("Idle_C");
+                if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+                {
+                    if (!player.GetBackgroundColor)
+                    {
+                        animator.SetTrigger("Idle");
+                    }
+                    else
+                    {
+                        animator.SetTrigger("Idle_C");
+                    }
+                }
             }
         }
 
@@ -94,6 +99,7 @@ public class InputManager : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
             if (player.GetAnimator)
             {
+                print(player.GetAnimator);
                 if (!player.GetBackgroundColor)
                 {
                     animator.SetTrigger("Run");
@@ -112,14 +118,18 @@ public class InputManager : MonoBehaviour
         {
             transform.localPosition -= new Vector3(Time.deltaTime * player.runSpeed, 0, 0);
             transform.localScale = new Vector3(-1, 1, 1);
-            if (!player.GetBackgroundColor)
+            if (player.GetAnimator)
             {
-                animator.SetTrigger("Run");
+                if (!player.GetBackgroundColor)
+                {
+                    animator.SetTrigger("Run");
+                }
+                else
+                {
+                    animator.SetTrigger("Run_C");
+                }
             }
-            else
-            {
-                animator.SetTrigger("Run_C");
-            }
+
         }
     }
 
