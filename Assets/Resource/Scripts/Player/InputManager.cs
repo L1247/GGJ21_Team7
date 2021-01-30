@@ -64,13 +64,21 @@ public class InputManager : MonoBehaviour
             transform.localPosition -= new Vector3(0, Time.deltaTime * player.runSpeed, 0);
             if (player.GetAnimator)
             {
-                animator.SetTrigger("Climb");
+                if (!player.GetBackgroundColor)
+                {
+                    animator.SetTrigger("Climb");
+                }
+                else
+                {
+                    animator.SetTrigger("Climb_C");
+                }
             }
         }
 
         if (!Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow))
         {
             animator.ResetTrigger("Climb");
+            animator.ResetTrigger("Climb_C");
         }
     }
 
@@ -82,7 +90,15 @@ public class InputManager : MonoBehaviour
             transform.localScale    =  new Vector3(1,                                1, 1);
             if (player.GetAnimator)
             {
-                animator.SetTrigger("Run");
+                if (!player.GetBackgroundColor)
+                {
+                    animator.SetTrigger("Run");
+                }
+                else
+                {
+                    animator.SetTrigger("Run_C");
+                }
+
             }
         }
     }
