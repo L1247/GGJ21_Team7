@@ -3,12 +3,9 @@ using UnityEngine;
 
 namespace Main.ActorFeature
 {
-    public class Climb : MonoBehaviour
+    public class Climb : Feature
     {
     #region Private Variables
-
-        private Actor         _actor;
-        private IInputService _inputService;
 
         [SerializeField]
         private float MoveSpeed;
@@ -32,12 +29,6 @@ namespace Main.ActorFeature
     #endregion
 
     #region Private Methods
-
-        private void Awake()
-        {
-            _inputService = GetComponent<IInputService>();
-            _actor        = GetComponent<Actor>();
-        }
 
         private void Update()
         {

@@ -3,12 +3,10 @@ using UnityEngine;
 
 namespace Main.ActorFeature
 {
-    public class Jump : MonoBehaviour
+    public class Jump : Feature
     {
     #region Private Variables
 
-        private Actor         _actor;
-        private IInputService _inputService;
 
         [SerializeField]
         private float JumpForce;
@@ -29,11 +27,7 @@ namespace Main.ActorFeature
 
     #region Private Methods
 
-        private void Awake()
-        {
-            _inputService = GetComponent<IInputService>();
-            _actor        = GetComponent<Actor>();
-        }
+
 
         private void Update()
         {

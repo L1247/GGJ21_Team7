@@ -1,14 +1,10 @@
-using Main.Input;
 using UnityEngine;
 
 namespace Main.ActorFeature
 {
-    public class MoveLeft : MonoBehaviour
+    public class MoveLeft : Feature
     {
     #region Private Variables
-
-        private Actor         _actor;
-        private IInputService _inputService;
 
         [SerializeField]
         private float moveSpeed = 5;
@@ -28,12 +24,6 @@ namespace Main.ActorFeature
     #endregion
 
     #region Private Methods
-
-        private void Awake()
-        {
-            _inputService = GetComponent<IInputService>();
-            _actor        = GetComponent<Actor>();
-        }
 
         private void Update()
         {
