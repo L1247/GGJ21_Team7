@@ -151,8 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9de8981c1cec4e448387da2c22ea948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 4
+  jumpForce: 10
   runSpeed: 8
+  hitBackForce: 5
   hitCount: 5
   _rigidbody2D: {fileID: 0}
   sfxSource: {fileID: 0}
@@ -175,7 +176,8 @@ MonoBehaviour:
   getAnimator: 0
   getAudio: 0
   getBackgroundColor: 0
-  getLight: 0
+  getRestart: 0
+  getHit: 0
 --- !u!114 &4302495910035130919
 MonoBehaviour:
   m_ObjectHideFlags: 0

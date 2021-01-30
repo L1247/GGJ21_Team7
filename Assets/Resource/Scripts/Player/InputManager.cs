@@ -70,7 +70,7 @@ public class InputManager : MonoBehaviour
 
     private void GoRight()
     {
-        if (Input.GetKey(KeyCode.RightArrow) && !player.isClimbing)
+        if (Input.GetKey(KeyCode.RightArrow) && !player.isClimbing && !player.GETHit)
         {
             transform.localPosition += new Vector3(Time.deltaTime * player.runSpeed, 0, 0);
             transform.localScale = new Vector3(1, 1, 1);
@@ -93,7 +93,7 @@ public class InputManager : MonoBehaviour
     {
         if (player.LeftKey)
         {
-            if (Input.GetKey(KeyCode.LeftArrow) && !player.isClimbing)
+            if (Input.GetKey(KeyCode.LeftArrow) && !player.isClimbing && !player.GETHit)
             {
                 transform.localPosition -= new Vector3(Time.deltaTime * player.runSpeed, 0, 0);
                 transform.localScale = new Vector3(-1, 1, 1);
@@ -115,7 +115,7 @@ public class InputManager : MonoBehaviour
 
     private void Jump()
     {
-        if (player.Jump && !player.isJump && !player.isClimbing)
+        if (player.Jump && !player.isJump && !player.isClimbing && !player.GETHit)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {

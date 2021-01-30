@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     // [SerializeField] private float jumpColdTime;
     public float jumpForce;
     public float runSpeed;
+    [SerializeField] private float hitBackForce;
     [SerializeField] private int hitCount;
     public int PlayerHitCount
     {
@@ -84,13 +85,29 @@ public class Player : MonoBehaviour
         set => getBackgroundColor = value;
     }
 
-    [SerializeField] private bool getLight;
+    [SerializeField] private bool getRestart;
+    public bool GetRestart
+    {
+        get => getRestart;
+        set => getRestart = value;
+    }
+
+    private bool getLight;
 
 
     public bool GetLight
     {
         get => getLight;
         set => getLight = value;
+    }
+
+    [SerializeField] private bool getHit;
+
+
+    public bool GETHit
+    {
+        get => getHit;
+        set => getHit = value;
     }
 
     void Start()
@@ -127,7 +144,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            _rigidbody2D.gravityScale=1;
+            _rigidbody2D.gravityScale=3;
         }
 
         // if (!GetBackgroundColor)
@@ -156,7 +173,7 @@ public class Player : MonoBehaviour
         }
         if (other.tag=="Enemy")
         {
-            GetHit();
+            GetHit(other);
         }
 
         if (other.tag=="Item")
@@ -205,6 +222,11 @@ public class Player : MonoBehaviour
                     GetLight = true;
                     Destroy(other.gameObject);
                     break;
+                case ItemType.Restart:
+                    print("Get Restart");
+                    GetRestart = true;
+                    Destroy(other.gameObject);
+                    break;
                 case ItemType.Teleport :
                     print("Teleport to : "+ nextLevelPosition.position);
                     TeleportToNextLevel();
@@ -251,9 +273,19 @@ public class Player : MonoBehaviour
         sfxSource.PlayOneShot(jumpSFX);
     }
 
-    public void GetHit()
+    public void GetHit(Collider2D other)
     {
+        GETHit = true;
+        if (other.transform.position.x> transform.position.x)
+        {
+            _rigidbody2D.velocity = new Vector2(-hitBackForce, 0);
+        }
+        else
+        {
+            _rigidbody2D.velocity = new Vector2(hitBackForce, 0);
+        }
         hitCount--;
+        StartCoroutine(HitBack());
         print("Current hit is : "+ hitCount);
         if (GetAudio)
         {
@@ -267,7 +299,16 @@ public class Player : MonoBehaviour
             {
                 PlayDeadSFX();
             }
-            StartCoroutine(BackToTitle());
+
+            if (GetRestart)
+            {
+                StartCoroutine(BackToTitle());
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
         }
     }
 
@@ -290,6 +331,12 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(0);
+    }
+
+    IEnumerator HitBack()
+    {
+        yield return new WaitForSeconds(1f);
+        GETHit = false;
     }
 
 }

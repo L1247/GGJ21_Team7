@@ -16,5 +16,6 @@ public enum ItemType
     Audio,
     BackgroundColor,
     Light,
+    Restart,
     Teleport
 }
