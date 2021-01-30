@@ -7,17 +7,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4302495909961000655, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.38032073
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302495909961000655, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.38032073
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302495909961000655, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.38032073
+      objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getJump
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getAudio
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getClimb
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getLight
@@ -25,20 +37,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getLeftKey
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: getRestart
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getAnimator
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: hitBackForce
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: backgroundLine
+      value: 
+      objectReference: {fileID: 21300000, guid: 320dbbf7f4e9f1a49808a31787f35da8, type: 3}
+    - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getBackgroundColor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: backgroundFullColor
+      value: 
+      objectReference: {fileID: 21300000, guid: 92953a8c5430d5e47a1d38929cc94846, type: 3}
     - target: {fileID: 4302495910035130918, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: m_Name
       value: PlayerAllPower
@@ -53,11 +77,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130938, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -8.84
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130938, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.71
+      value: 1.51
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130938, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: m_LocalPosition.z

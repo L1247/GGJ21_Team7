@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.SceneManagement;
@@ -19,7 +20,7 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!player.isClimbing && !player.getHit)
+        if (!player.getHit)
         {
             GoRight();
             if (player.LeftKey)
@@ -105,6 +106,10 @@ public class InputManager : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2 * player.jumpForce);
             if (player.GetAnimator)
             {
+                if (player.GetBackgroundColor)
+                {
+
+                }
                 animator.SetTrigger("Jump");
             }
 
