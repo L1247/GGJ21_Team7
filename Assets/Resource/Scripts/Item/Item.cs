@@ -17,5 +17,6 @@ public enum ItemType
     BackgroundColor,
     Light,
     Restart,
-    Teleport
+    Teleport,
+    Icon
 }

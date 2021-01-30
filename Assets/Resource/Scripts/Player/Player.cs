@@ -122,17 +122,41 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        // getLeftKey = false;
-        // getJump = false;
-        // getAnimator = false;
-        // getAudio = false;
-        // getBackgroundColor = false;
-        // getLight = false;
-        // getClimb = false;
-        //
-        // timer = 0;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         sfxSource = GetComponent<AudioSource>();
+        if (SceneManager.GetActiveScene().buildIndex==1)
+        {
+            NoPowerPlayer();
+
+        }
+        else
+        {
+            FullPowerPlayer();
+        }
+    }
+
+    private void FullPowerPlayer()
+    {
+        sfxSource.enabled = true;
+        audioManager.enabled = true;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[1];
+        background.sprite = backgroundSprite[1];
+        LeftKey = true;
+        GetAnimator = true;
+        Jump = true;
+        Climb = true;
+        GetBackgroundColor = true;
+        GetAudio = true;
+        GetRestart = true;
+        rightKey.SetActive(true);
+        upKey.SetActive(true);
+        downKey.SetActive(true);
+        leftKey.SetActive(true);
+        spaceKey.SetActive(true);
+    }
+
+    private void NoPowerPlayer()
+    {
         sfxSource.enabled = false;
         audioManager.enabled = false;
         transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[0];
@@ -209,23 +233,12 @@ public class Player : MonoBehaviour
         if (isClimbing)
         {
             _rigidbody2D.gravityScale=0;
-            _rigidbody2D.velocity = new Vector2(0, 0);
+            _rigidbody2D.velocity = Vector2.zero;
         }
         else
         {
             _rigidbody2D.gravityScale=3;
         }
-
-        // if (!GetBackgroundColor)
-        // {
-        //     transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerLine;
-        //     background.sprite = backgroundLine;
-        // }
-        // else
-        // {
-        //     transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerFullColor;
-        //     background.sprite = backgroundFullColor;
-        // }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -237,7 +250,6 @@ public class Player : MonoBehaviour
                 print("Climbing");
                 // transform.position = other.transform.position;
                 isClimbing = true;
-                // _rigidbody2D.velocity = new Vector2(0, jumpForce / 2);
             }
         }
         if (other.tag=="Enemy")
@@ -299,7 +311,11 @@ public class Player : MonoBehaviour
                     break;
                 case ItemType.Teleport :
                     print("Teleport to : "+ nextLevelPosition.position);
-                    TeleportToNextLevel();
+                    // TeleportToNextLevel();
+                    break;
+                case ItemType.Icon:
+
+                    WinGame();
                     break;
                 default:
                     break;
@@ -310,6 +326,8 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -421,13 +439,26 @@ public class Player : MonoBehaviour
     IEnumerator BackToTitle()
     {
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(1);
+        if (SceneManager.GetActiveScene().buildIndex==1)
+        {
+            SceneManager.LoadScene(1);
+
+        }
+        else if(SceneManager.GetActiveScene().buildIndex==2)
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 
     IEnumerator HitBack()
     {
         yield return new WaitForSeconds(1f);
         getHit = false;
+    }
+
+    private void WinGame()
+    {
+
     }
 
 }

@@ -1,4 +1,5 @@
-﻿using UnityEditor.Animations;
+﻿using System;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -47,6 +48,19 @@ public class InputManager : MonoBehaviour
         if (player.isClimbing)
         {
             Climb();
+        }
+
+        if (player.GetLight)
+        {
+            SwitchLight();
+        }
+    }
+
+    private void SwitchLight()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            
         }
     }
 
