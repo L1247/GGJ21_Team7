@@ -25,11 +25,16 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform nextLevelPosition;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private SpriteRenderer background;
+
+    [Header("獲得能力UI")]
     [SerializeField] private GameObject upKey;
     [SerializeField] private GameObject downKey;
     [SerializeField] private GameObject rightKey;
     [SerializeField] private GameObject leftKey;
     [SerializeField] private GameObject spaceKey;
+
+    [Header("血條UI")]
+    [SerializeField] private Image[] healthStars;
 
 
     [Header("圖片")]
@@ -40,7 +45,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] rightSprite;
     [SerializeField] private Sprite[] leftSprite;
     [SerializeField] private Sprite[] spaceSprite;
-
+    [SerializeField] private Sprite[] healthStar;
 
 
     [Header("音效")]
@@ -358,6 +363,7 @@ public class Player : MonoBehaviour
             _rigidbody2D.velocity = new Vector2(hitBackForce, 0);
         }
         hitCount--;
+        healthStars[hitCount].sprite = healthStar[1];
         StartCoroutine(HitBack());
         print("Current hit is : "+ hitCount);
         if (GetAudio)
