@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
-using UnityEngine;
-using UnityEngine.LowLevel;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private Player player;
+    [SerializeField] private Player   player;
     [SerializeField] private Animator animator;
 
     void Start()
     {
-        player = GetComponent<Player>();
+        player   = GetComponent<Player>();
         animator = GetComponent<Animator>();
     }
 
@@ -76,7 +70,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.localPosition += new Vector3(Time.deltaTime * player.runSpeed, 0, 0);
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale    =  new Vector3(1,                                1, 1);
             if (player.GetAnimator)
             {
                 animator.SetTrigger("Run");
@@ -89,7 +83,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.localPosition -= new Vector3(Time.deltaTime * player.runSpeed, 0, 0);
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale    =  new Vector3(-1,                               1, 1);
             if (player.GetAnimator)
             {
                 animator.SetTrigger("Run");
