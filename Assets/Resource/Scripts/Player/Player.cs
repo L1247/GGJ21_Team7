@@ -1,44 +1,44 @@
 ﻿using System;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public class Player : MonoBehaviour
 {
-    [Header("行動參數")]
-    [SerializeField] private int whichSceneToLoad;
+    [Header("行動參數")] [SerializeField] private int whichSceneToLoad;
     public float jumpForce;
     public float runSpeed;
     [SerializeField] private float hitBackForce;
     [SerializeField] private int hitCount;
 
-    [Header("掛載物件")]
-    [SerializeField] private Rigidbody2D _rigidbody2D;
+    [Header("生成物")]
+    [SerializeField] private GameObject flashLightPrefabe;
+
+    [Header("掛載物件")] [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] AudioSource sfxSource;
     [SerializeField] AudioSource audioManager;
     [SerializeField] private Transform nextLevelPosition;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private SpriteRenderer background;
+    public FlashLight flashLight;
 
-    [Header("獲得能力UI")]
-    [SerializeField] private GameObject upKey;
+    [Header("獲得能力UI")] [SerializeField] private GameObject upKey;
     [SerializeField] private GameObject downKey;
     [SerializeField] private GameObject rightKey;
     [SerializeField] private GameObject leftKey;
     [SerializeField] private GameObject spaceKey;
 
-    [Header("獲得道具UI")]
-    [SerializeField] private GameObject audioIcon;
+    [Header("獲得道具UI")] [SerializeField] private GameObject audioIcon;
     [SerializeField] private GameObject restartIcon;
     [SerializeField] private GameObject flashLightIcon;
 
-    [Header("血條UI")]
-    [SerializeField] private Image[] healthStars;
+    [Header("血條UI")] [SerializeField] private Image[] healthStars;
 
 
-    [Header("圖片")]
-    [SerializeField] private Sprite[] playerSprite;
+    [Header("圖片")] [SerializeField] private Sprite[] playerSprite;
     [SerializeField] private Sprite[] backgroundSprite;
     [SerializeField] private Sprite[] upSprite;
     [SerializeField] private Sprite[] downSprite;
@@ -51,19 +51,17 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] healthStar;
 
 
-    [Header("音效")]
-    [SerializeField] private AudioClip jumpSFX;
+    [Header("音效")] [SerializeField] private AudioClip jumpSFX;
     [SerializeField] private AudioClip hitSFX;
     [SerializeField] private AudioClip powerSFX;
     [SerializeField] private AudioClip deadSFX;
 
-    [Header("判斷腳色狀態")]
-    public bool isJump;
+    [Header("判斷腳色狀態")] public bool isJump;
     public bool isClimbing;
     public bool getHit;
 
-    [Header("獲得能力")]
-    [SerializeField] bool getLeftKey;
+    [Header("獲得能力")] [SerializeField] bool getLeftKey;
+
     public bool LeftKey
     {
         get => getLeftKey;
@@ -71,6 +69,7 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool getJump;
+
     public bool Jump
     {
         get => getJump;
@@ -78,6 +77,7 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool getClimb;
+
     public bool Climb
     {
         get => getClimb;
@@ -85,6 +85,7 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool getAnimator;
+
     public bool GetAnimator
     {
         get => getAnimator;
@@ -92,6 +93,7 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool getAudio;
+
     public bool GetAudio
     {
         get => getAudio;
@@ -99,6 +101,7 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool getBackgroundColor;
+
     public bool GetBackgroundColor
     {
         get => getBackgroundColor;
@@ -106,6 +109,7 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool getRestart;
+
     public bool GetRestart
     {
         get => getRestart;
@@ -123,15 +127,13 @@ public class Player : MonoBehaviour
     }
 
 
-
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         sfxSource = GetComponent<AudioSource>();
-        if (SceneManager.GetActiveScene().buildIndex==1)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             NoPowerPlayer();
-
         }
         else
         {
@@ -152,7 +154,7 @@ public class Player : MonoBehaviour
         GetBackgroundColor = true;
         GetAudio = true;
         GetRestart = true;
-        GetLight = true;
+        GetLight = false;
         // rightKey.SetActive(true);
         // upKey.SetActive(true);
         // downKey.SetActive(true);
@@ -176,8 +178,7 @@ public class Player : MonoBehaviour
         GetRestart = false;
         GetBackgroundColor = false;
         GetAudio = false;
-        GetLight=false;
-
+        GetLight = false;
     }
 
     // Update is called once per frame
@@ -186,7 +187,7 @@ public class Player : MonoBehaviour
         if (!GetBackgroundColor)
         {
             rightKey.GetComponent<Image>().sprite = rightSprite[0];
-            if (SceneManager.GetActiveScene().buildIndex==1)
+            if (SceneManager.GetActiveScene().buildIndex == 1)
             {
                 background.sprite = backgroundSprite[0];
             }
@@ -194,12 +195,11 @@ public class Player : MonoBehaviour
             {
                 background.sprite = backgroundSprite[2];
             }
-
         }
         else
         {
             rightKey.GetComponent<Image>().sprite = rightSprite[1];
-            if (SceneManager.GetActiveScene().buildIndex==1)
+            if (SceneManager.GetActiveScene().buildIndex == 1)
             {
                 background.sprite = backgroundSprite[1];
             }
@@ -220,7 +220,6 @@ public class Player : MonoBehaviour
         }
 
 
-
         if (Jump)
         {
             spaceKey.SetActive(true);
@@ -230,6 +229,7 @@ public class Player : MonoBehaviour
         {
             spaceKey.SetActive(false);
         }
+
         if (Climb)
         {
             upKey.SetActive(true);
@@ -253,12 +253,12 @@ public class Player : MonoBehaviour
 
         if (isClimbing)
         {
-            _rigidbody2D.gravityScale=0;
+            _rigidbody2D.gravityScale = 0;
             _rigidbody2D.velocity = Vector2.zero;
         }
         else
         {
-            _rigidbody2D.gravityScale=3;
+            _rigidbody2D.gravityScale = 3;
         }
 
         if (GetAudio)
@@ -288,7 +288,17 @@ public class Player : MonoBehaviour
         if (GetLight)
         {
             flashLightIcon.SetActive(true);
-            flashLightIcon.GetComponent<Image>().sprite = !GetBackgroundColor ? flashLightSprite[0] : flashLightSprite[1];
+            flashLightIcon.GetComponent<Image>().sprite =
+                !GetBackgroundColor ? flashLightSprite[0] : flashLightSprite[1];
+            if (!isClimbing)
+            {
+                flashLight.gameObject.SetActive(true);
+            }
+            else
+            {
+                flashLight.isTurnOff = true;
+                flashLight.gameObject.SetActive(false);
+            }
         }
         else
         {
@@ -298,21 +308,26 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag=="Stair")
+        if (other.tag == "Stair")
         {
             if (Climb && !isClimbing)
             {
                 print("Climbing");
                 // transform.position = other.transform.position;
                 isClimbing = true;
+                if (GetLight)
+                {
+                    flashLight.isTurnOff = true;
+                }
             }
         }
-        if (other.tag=="Enemy")
+
+        if (other.tag == "Enemy")
         {
             GetHit(other);
         }
 
-        if (other.tag=="Item")
+        if (other.tag == "Item")
         {
             ItemType itemType = other.GetComponent<Item>().itemType;
             switch (itemType)
@@ -352,8 +367,12 @@ public class Player : MonoBehaviour
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Light:
-                    print("Light");
+                    print("GetFlashLight");
                     GetLight = true;
+                    GameObject flash = Instantiate(flashLightPrefabe,transform);
+                    flash.transform.localPosition = new Vector3(1.17f, -0.22f, 0);
+                    flash.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                    flashLight = flash.GetComponent<FlashLight>();
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Restart:
@@ -361,9 +380,9 @@ public class Player : MonoBehaviour
                     GetRestart = true;
                     Destroy(other.gameObject);
                     break;
-                case ItemType.Teleport :
-                    print("Teleport to : "+ nextLevelPosition.position);
-                   // TeleportToNextLevel();
+                case ItemType.Teleport:
+                    print("Teleport to : " + nextLevelPosition.position);
+                    // TeleportToNextLevel();
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Icon:
@@ -373,6 +392,7 @@ public class Player : MonoBehaviour
                 default:
                     break;
             }
+
             if (GetAudio)
             {
                 PlayPowerSFX();
@@ -381,14 +401,13 @@ public class Player : MonoBehaviour
     }
 
 
-
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag=="Stair" && isClimbing)
+        if (other.tag == "Stair" && isClimbing)
         {
             isClimbing = false;
             print("StopClimbing");
-            if (other.transform.position.y>transform.position.y)
+            if (other.transform.position.y > transform.position.y)
             {
                 _rigidbody2D.velocity = new Vector2(0, -jumpForce);
             }
@@ -396,14 +415,12 @@ public class Player : MonoBehaviour
             {
                 _rigidbody2D.velocity = new Vector2(0, jumpForce);
             }
-
-
         }
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag=="Floor")
+        if (other.tag == "Floor")
         {
             isJump = false;
         }
@@ -411,9 +428,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag=="Floor")
+        if (other.gameObject.tag == "Floor")
         {
-           isJump=false;
+            isJump = false;
         }
     }
 
@@ -436,7 +453,8 @@ public class Player : MonoBehaviour
                 GetComponent<Animator>().SetTrigger("Hurt_C");
             }
         }
-        if (other.transform.position.x> transform.position.x)
+
+        if (other.transform.position.x > transform.position.x)
         {
             _rigidbody2D.velocity = new Vector2(-hitBackForce, 0);
         }
@@ -444,16 +462,17 @@ public class Player : MonoBehaviour
         {
             _rigidbody2D.velocity = new Vector2(hitBackForce, 0);
         }
+
         hitCount--;
         healthStars[hitCount].sprite = healthStar[1];
         StartCoroutine(HitBack());
-        print("Current hit is : "+ hitCount);
+        print("Current hit is : " + hitCount);
         if (GetAudio)
         {
             sfxSource.PlayOneShot(hitSFX);
         }
 
-        if (hitCount<=0)
+        if (hitCount <= 0)
         {
             print("Dead");
             if (GetAudio)
@@ -470,7 +489,6 @@ public class Player : MonoBehaviour
                 transform.GetChild(1).SetParent(background.transform);
                 gameObject.SetActive(false);
             }
-
         }
     }
 
@@ -504,7 +522,5 @@ public class Player : MonoBehaviour
 
     private void WinGame()
     {
-
     }
-
 }

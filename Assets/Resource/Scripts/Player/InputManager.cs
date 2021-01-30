@@ -50,7 +50,7 @@ public class InputManager : MonoBehaviour
             Climb();
         }
 
-        if (player.GetLight)
+        if (player.GetLight && !player.isClimbing && !player.isJump)
         {
             SwitchLight();
         }
@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-
+            player.flashLight.isTurnOff = !player.flashLight.isTurnOff;
         }
     }
 

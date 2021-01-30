@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 636c986a58e17a3489f7f15e82582a5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -153,7 +153,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6f6328fafb73e8447888f737071c33f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -256,6 +256,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4431099365994341527}
+  - component: {fileID: 4474780793850663816}
+  - component: {fileID: 7527605626423994587}
+  - component: {fileID: 1493016250573077720}
   m_Layer: 0
   m_Name: "\u624B\u96FB\u7B52"
   m_TagString: Untagged
@@ -272,10 +275,70 @@ Transform:
   m_GameObject: {fileID: 4205164577400126820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.28, y: 29.25, z: 0}
-  m_LocalScale: {x: 0.55049, y: 0.55049, z: 0.55049}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 133138654282589654}
   - {fileID: 3602461841450679129}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &4474780793850663816
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205164577400126820}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 14.554691, y: 0.3326435}
+  - {x: 14.733749, y: 4.6704164}
+  - {x: 13.474291, y: 7.778069}
+  - {x: 11.023412, y: 10.498777}
+  - {x: 7.858665, y: 12.0166855}
+  m_AdjacentStartPoint: {x: 1.84, y: -0.4}
+  m_AdjacentEndPoint: {x: 0.87, y: 1.52}
+  m_UseAdjacentStartPoint: 1
+  m_UseAdjacentEndPoint: 1
+--- !u!114 &7527605626423994587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205164577400126820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0839cdc921c89244bb44286430daacd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highLight: {fileID: 3099745584609910540}
+  isTurnOff: 0
+--- !u!50 &1493016250573077720
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205164577400126820}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
