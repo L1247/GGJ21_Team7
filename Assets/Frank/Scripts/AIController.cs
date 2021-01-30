@@ -1,9 +1,12 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
     #region 宣告
+    [Header("初始值")]
+    [SerializeField] float positiveLocalScale;
+    [SerializeField] float negativeLocalScale;
+
     [Header("移動速度")]
     [SerializeField] float moveSpeed = 1.5f;
     [Header("加速倍數")]
@@ -25,7 +28,6 @@ public class AIController : MonoBehaviour
 
     private GameObject player;
     private Animator animator;
-    private SpriteRenderer sprite;
 
     private bool IsMoveRight;
     private float time;
@@ -35,7 +37,6 @@ public class AIController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
-        sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -79,11 +80,11 @@ public class AIController : MonoBehaviour
 
         if (IsPlayerOnRight())
         {
-            sprite.flipX = false;
+            transform.localScale = new Vector2(positiveLocalScale, positiveLocalScale);
         }
         else
         {
-            sprite.flipX = true;
+            transform.localScale = new Vector2(negativeLocalScale, positiveLocalScale);
         }
 
         animator.SetBool("IsWalk", true);
@@ -96,12 +97,12 @@ public class AIController : MonoBehaviour
         if (IsMoveRight)
         {
             transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
-            sprite.flipX = false;
+            transform.localScale = new Vector2(positiveLocalScale, positiveLocalScale);
         }
         else
         {
             transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
-            sprite.flipX = true;
+            transform.localScale = new Vector2(negativeLocalScale, positiveLocalScale);
         }
 
         animator.SetBool("IsWalk", true);
