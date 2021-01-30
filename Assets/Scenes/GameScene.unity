@@ -331,7 +331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7093975960319607078, guid: 0428c5b6cf522524780c95a5593ae665, type: 3}
       propertyPath: jumpForce
-      value: 10
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 7093975960319607078, guid: 0428c5b6cf522524780c95a5593ae665, type: 3}
       propertyPath: getBackgroundColor
@@ -347,15 +347,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7093975960319607078, guid: 0428c5b6cf522524780c95a5593ae665, type: 3}
       propertyPath: getClimb
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7093975960319607078, guid: 0428c5b6cf522524780c95a5593ae665, type: 3}
       propertyPath: getJump
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7093975960319607078, guid: 0428c5b6cf522524780c95a5593ae665, type: 3}
       propertyPath: getLeftKey
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7093975960319607078, guid: 0428c5b6cf522524780c95a5593ae665, type: 3}
       propertyPath: upKey
@@ -49159,6 +49159,7 @@ GameObject:
   - component: {fileID: 811536504}
   - component: {fileID: 811536503}
   - component: {fileID: 811536506}
+  - component: {fileID: 811536507}
   m_Layer: 0
   m_Name: "\u5531\u7247\u6A5F_\u8272\u7A3F"
   m_TagString: Item
@@ -49284,6 +49285,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateObjects:
   - {fileID: 456777392}
+--- !u!114 &811536507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811536501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb006bb09b799134493e035deebd23be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: bdcced08e5fbe9c4f8e11611983011b5, type: 3}
 --- !u!1 &846107611
 GameObject:
   m_ObjectHideFlags: 0
@@ -49567,6 +49581,7 @@ GameObject:
   - component: {fileID: 1153247307}
   - component: {fileID: 1153247306}
   - component: {fileID: 1153247305}
+  - component: {fileID: 1153247308}
   m_Layer: 0
   m_Name: "\u984F\u8272"
   m_TagString: Item
@@ -49678,6 +49693,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.99, y: 9.89}
   m_EdgeRadius: 0
+--- !u!114 &1153247308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153247303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb006bb09b799134493e035deebd23be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: bdcced08e5fbe9c4f8e11611983011b5, type: 3}
 --- !u!1 &1213981310
 GameObject:
   m_ObjectHideFlags: 0
@@ -49690,6 +49718,7 @@ GameObject:
   - component: {fileID: 1213981314}
   - component: {fileID: 1213981313}
   - component: {fileID: 1213981312}
+  - component: {fileID: 1213981315}
   m_Layer: 0
   m_Name: "\u8DF3\u8E8D"
   m_TagString: Item
@@ -49801,6 +49830,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.99, y: 9.89}
   m_EdgeRadius: 0
+--- !u!114 &1213981315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213981310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb006bb09b799134493e035deebd23be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: bdcced08e5fbe9c4f8e11611983011b5, type: 3}
 --- !u!1 &1258171096
 GameObject:
   m_ObjectHideFlags: 0
@@ -50554,6 +50596,7 @@ GameObject:
   - component: {fileID: 1440065399}
   - component: {fileID: 1440065398}
   - component: {fileID: 1440065397}
+  - component: {fileID: 1440065400}
   m_Layer: 0
   m_Name: "\u5DE6\u9375"
   m_TagString: Item
@@ -50665,6 +50708,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.99, y: 9.89}
   m_EdgeRadius: 0
+--- !u!114 &1440065400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440065395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb006bb09b799134493e035deebd23be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: bdcced08e5fbe9c4f8e11611983011b5, type: 3}
 --- !u!1 &1455936450
 GameObject:
   m_ObjectHideFlags: 0
@@ -51117,6 +51173,7 @@ GameObject:
   - component: {fileID: 1646363091}
   - component: {fileID: 1646363090}
   - component: {fileID: 1646363089}
+  - component: {fileID: 1646363092}
   m_Layer: 0
   m_Name: "\u6500\u722C"
   m_TagString: Item
@@ -51228,6 +51285,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.99, y: 9.89}
   m_EdgeRadius: 0
+--- !u!114 &1646363092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646363087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb006bb09b799134493e035deebd23be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: bdcced08e5fbe9c4f8e11611983011b5, type: 3}
 --- !u!1 &1656874340
 GameObject:
   m_ObjectHideFlags: 0
@@ -51532,6 +51602,7 @@ GameObject:
   - component: {fileID: 2102881069}
   - component: {fileID: 2102881068}
   - component: {fileID: 2102881067}
+  - component: {fileID: 2102881070}
   m_Layer: 0
   m_Name: "\u89D2\u8272\u52D5\u756B"
   m_TagString: Item
@@ -51643,6 +51714,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.99, y: 9.89}
   m_EdgeRadius: 0
+--- !u!114 &2102881070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102881065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb006bb09b799134493e035deebd23be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: bdcced08e5fbe9c4f8e11611983011b5, type: 3}
 --- !u!1 &2107901092
 GameObject:
   m_ObjectHideFlags: 0

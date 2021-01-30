@@ -9,90 +9,143 @@ public class Player : MonoBehaviour
     // [SerializeField] float timer = 0;
     // [SerializeField] private float jumpColdTime;
     public float jumpForce;
+
     public float runSpeed;
-    [SerializeField] private float hitBackForce;
-    [SerializeField] private int hitCount;
+
+    [SerializeField]
+    private float hitBackForce;
+
+    [SerializeField]
+    private int hitCount;
+
     public int PlayerHitCount
     {
         get => hitCount;
     }
 
     [Header("掛載物件")]
-    [SerializeField] private Rigidbody2D _rigidbody2D;
-    [SerializeField] AudioSource sfxSource;
-    [SerializeField] AudioSource audioManager;
-    [SerializeField] private Transform nextLevelPosition;
-    [SerializeField] private SpriteRenderer background;
-    [SerializeField] private GameObject upKey;
-    [SerializeField] private GameObject downKey;
-    [SerializeField] private GameObject rightKey;
-    [SerializeField] private GameObject leftKey;
-    [SerializeField] private GameObject spaceKey;
+    [SerializeField]
+    private Rigidbody2D _rigidbody2D;
+
+    [SerializeField]
+    AudioSource sfxSource;
+
+    [SerializeField]
+    AudioSource audioManager;
+
+    [SerializeField]
+    private Transform nextLevelPosition;
+
+    [SerializeField]
+    private SpriteRenderer background;
+
+    [SerializeField]
+    private GameObject upKey;
+
+    [SerializeField]
+    private GameObject downKey;
+
+    [SerializeField]
+    private GameObject rightKey;
+
+    [SerializeField]
+    private GameObject leftKey;
+
+    [SerializeField]
+    private GameObject spaceKey;
 
 
     [Header("圖片")]
-    [SerializeField] private Sprite playerLine;
-    [SerializeField] private Sprite playerFullColor;
-    [SerializeField] private Sprite backgroundLine;
-    [SerializeField] private Sprite backgroundFullColor;
+    [SerializeField]
+    private Sprite playerLine;
 
+    [SerializeField]
+    private Sprite playerFullColor;
+
+    [SerializeField]
+    private Sprite backgroundLine;
+
+    [SerializeField]
+    private Sprite backgroundFullColor;
 
 
     [Header("音效")]
-    [SerializeField] private AudioClip jumpSFX;
-    [SerializeField] private AudioClip hitSFX;
-    [SerializeField] private AudioClip powerSFX;
-    [SerializeField] private AudioClip deadSFX;
+    [SerializeField]
+    private AudioClip jumpSFX;
+
+    [SerializeField]
+    private AudioClip hitSFX;
+
+    [SerializeField]
+    private AudioClip powerSFX;
+
+    [SerializeField]
+    private AudioClip deadSFX;
 
     [Header("判斷腳色狀態")]
     public bool isJump;
+
     public bool isClimbing;
     public bool getHit;
 
     [Header("獲得能力")]
-    [SerializeField] bool getLeftKey;
+    [SerializeField]
+    bool getLeftKey;
+
     public bool LeftKey
     {
         get => getLeftKey;
         set => getLeftKey = value;
     }
 
-    [SerializeField] private bool getJump;
+    [SerializeField]
+    private bool getJump;
+
     public bool Jump
     {
         get => getJump;
         set => getJump = value;
     }
 
-    [SerializeField] private bool getClimb;
+    [SerializeField]
+    private bool getClimb;
+
     public bool Climb
     {
         get => getClimb;
         set => getClimb = value;
     }
 
-    [SerializeField] private bool getAnimator;
+    [SerializeField]
+    private bool getAnimator;
+
     public bool GetAnimator
     {
         get => getAnimator;
         set => getAnimator = value;
     }
 
-    [SerializeField] private bool getAudio;
+    [SerializeField]
+    private bool getAudio;
+
     public bool GetAudio
     {
         get => getAudio;
         set => getAudio = value;
     }
 
-    [SerializeField] private bool getBackgroundColor;
+    [SerializeField]
+    private bool getBackgroundColor;
+
     public bool GetBackgroundColor
     {
         get => getBackgroundColor;
         set => getBackgroundColor = value;
     }
 
-    [SerializeField] private bool getRestart;
+    [SerializeField]
+    private bool getRestart;
+
     public bool GetRestart
     {
         get => getRestart;
@@ -109,7 +162,6 @@ public class Player : MonoBehaviour
     }
 
 
-
     void Start()
     {
         // getLeftKey = false;
@@ -121,12 +173,12 @@ public class Player : MonoBehaviour
         // getClimb = false;
         //
         // timer = 0;
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        sfxSource = GetComponent<AudioSource>();
-        sfxSource.enabled = false;
-        audioManager.enabled = false;
+        _rigidbody2D                                                = GetComponent<Rigidbody2D>();
+        sfxSource                                                   = GetComponent<AudioSource>();
+        sfxSource.enabled                                           = false;
+        audioManager.enabled                                        = false;
         transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerLine;
-        background.sprite = backgroundLine;
+        background.sprite                                           = backgroundLine;
         rightKey.SetActive(true);
         upKey.SetActive(false);
         downKey.SetActive(false);
@@ -168,12 +220,12 @@ public class Player : MonoBehaviour
 
         if (isClimbing)
         {
-            _rigidbody2D.gravityScale=0;
-            _rigidbody2D.velocity = new Vector2(0, 0);
+            _rigidbody2D.gravityScale = 0;
+            _rigidbody2D.velocity     = new Vector2(0 , 0);
         }
         else
         {
-            _rigidbody2D.gravityScale=3;
+            _rigidbody2D.gravityScale = 3;
         }
 
         // if (!GetBackgroundColor)
@@ -190,79 +242,81 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag=="Stair")
+        if (other.tag == "Stair")
         {
             if (Climb && !isClimbing)
             {
                 print("Climbing");
-                transform.position = other.transform.position;
+                // transform.position = other.transform.position;
                 isClimbing = true;
                 // _rigidbody2D.velocity = new Vector2(0, jumpForce / 2);
             }
         }
-        if (other.tag=="Enemy")
+
+        if (other.tag == "Enemy")
         {
             GetHit(other);
         }
 
-        if (other.tag=="Item")
+        if (other.tag == "Item")
         {
             ItemType itemType = other.GetComponent<Item>().itemType;
             switch (itemType)
             {
-                case ItemType.LeftKey:
+                case ItemType.LeftKey :
                     LeftKey = true;
                     print("GetLeftKey");
                     Destroy(other.gameObject);
                     break;
-                case ItemType.Jump:
+                case ItemType.Jump :
                     Jump = true;
                     print("GetJump");
                     Destroy(other.gameObject);
                     break;
-                case ItemType.Climb:
+                case ItemType.Climb :
                     Climb = true;
                     print("GetClimb");
                     Destroy(other.gameObject);
                     break;
-                case ItemType.Animation:
+                case ItemType.Animation :
                     GetAnimator = true;
                     print("GetAnimation");
                     Destroy(other.gameObject);
                     break;
-                case ItemType.Audio:
+                case ItemType.Audio :
                     GetAudio = true;
                     print("GetSound");
-                    sfxSource.enabled = true;
+                    sfxSource.enabled    = true;
                     audioManager.enabled = true;
-                    audioManager.volume = 0.5f;
+                    audioManager.volume  = 0.5f;
                     audioManager.Play();
                     Destroy(other.gameObject);
                     break;
-                case ItemType.BackgroundColor:
+                case ItemType.BackgroundColor :
                     GetBackgroundColor = true;
                     print("GetColor");
                     transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerFullColor;
-                    background.sprite = backgroundFullColor;
+                    background.sprite                                           = backgroundFullColor;
                     Destroy(other.gameObject);
                     break;
-                case ItemType.Light:
+                case ItemType.Light :
                     print("Light");
                     GetLight = true;
                     Destroy(other.gameObject);
                     break;
-                case ItemType.Restart:
+                case ItemType.Restart :
                     print("Get Restart");
                     GetRestart = true;
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Teleport :
-                    print("Teleport to : "+ nextLevelPosition.position);
+                    print("Teleport to : " + nextLevelPosition.position);
                     TeleportToNextLevel();
                     break;
-                default:
+                default :
                     break;
             }
+
             if (GetAudio)
             {
                 PlayPowerSFX();
@@ -272,26 +326,24 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag=="Stair" && isClimbing)
+        if (other.tag == "Stair" && isClimbing)
         {
             isClimbing = false;
             print("StopClimbing");
-            if (other.transform.position.y>transform.position.y)
+            if (other.transform.position.y > transform.position.y)
             {
-                _rigidbody2D.velocity = new Vector2(0, -jumpForce);
+                _rigidbody2D.velocity = new Vector2(0 , -jumpForce);
             }
             else
             {
-                _rigidbody2D.velocity = new Vector2(0, jumpForce);
+                _rigidbody2D.velocity = new Vector2(0 , jumpForce);
             }
-
-
         }
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag=="Floor")
+        if (other.tag == "Floor")
         {
             isJump = false;
         }
@@ -299,9 +351,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag=="Floor")
+        if (other.gameObject.tag == "Floor")
         {
-           isJump=false;
+            isJump = false;
         }
     }
 
@@ -313,23 +365,24 @@ public class Player : MonoBehaviour
     public void GetHit(Collider2D other)
     {
         getHit = true;
-        if (other.transform.position.x> transform.position.x)
+        if (other.transform.position.x > transform.position.x)
         {
-            _rigidbody2D.velocity = new Vector2(-hitBackForce, 0);
+            _rigidbody2D.velocity = new Vector2(-hitBackForce , 0);
         }
         else
         {
-            _rigidbody2D.velocity = new Vector2(hitBackForce, 0);
+            _rigidbody2D.velocity = new Vector2(hitBackForce , 0);
         }
+
         hitCount--;
         StartCoroutine(HitBack());
-        print("Current hit is : "+ hitCount);
+        print("Current hit is : " + hitCount);
         if (GetAudio)
         {
             sfxSource.PlayOneShot(hitSFX);
         }
 
-        if (hitCount<=0)
+        if (hitCount <= 0)
         {
             print("Dead");
             if (GetAudio)
@@ -345,7 +398,6 @@ public class Player : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-
         }
     }
 
@@ -375,5 +427,4 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(1f);
         getHit = false;
     }
-
 }
