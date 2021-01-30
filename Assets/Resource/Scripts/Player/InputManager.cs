@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.LowLevel;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -18,7 +19,6 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Jump();
         if (!player.isClimbing && !player.getHit)
         {
             GoRight();
@@ -26,35 +26,47 @@ public class InputManager : MonoBehaviour
             {
                 GoLeft();
             }
+
+            if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+            {
+                animator.ResetTrigger("Run");
+            }
         }
 
+        if (player.Jump && !player.isJump && !player.isClimbing && !player.getHit)
+        {
+            Jump();
+        }
 
-
-
-        Climb();
+        if (player.isClimbing)
+        {
+            Climb();
+        }
     }
 
     private void Climb()
     {
-        if (player.isClimbing)
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            if (Input.GetKey(KeyCode.UpArrow))
+            transform.localPosition += new Vector3(0, Time.deltaTime * player.runSpeed, 0);
+            if (player.GetAnimator)
             {
-                transform.localPosition += new Vector3(0, Time.deltaTime * player.runSpeed, 0);
-                if (player.GetAnimator)
-                {
-                    animator.SetTrigger("Run");
-                }
+                animator.SetTrigger("Climb");
             }
+        }
 
-            if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.localPosition -= new Vector3(0, Time.deltaTime * player.runSpeed, 0);
+            if (player.GetAnimator)
             {
-                transform.localPosition -= new Vector3(0, Time.deltaTime * player.runSpeed, 0);
-                if (player.GetAnimator)
-                {
-                    animator.SetTrigger("Run");
-                }
+                animator.SetTrigger("Climb");
             }
+        }
+
+        if (!Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow))
+        {
+            animator.ResetTrigger("Climb");
         }
     }
 
@@ -66,16 +78,7 @@ public class InputManager : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
             if (player.GetAnimator)
             {
-                animator.SetBool("Idle", false);
-                animator.SetBool("Run", true);
-            }
-        }
-        else
-        {
-            if (player.GetAnimator)
-            {
-                animator.SetBool("Run", false);
-                animator.SetBool("Idle", true);
+                animator.SetTrigger("Run");
             }
         }
     }
@@ -88,39 +91,26 @@ public class InputManager : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
             if (player.GetAnimator)
             {
-                animator.SetBool("Idle", false);
-                animator.SetBool("Run", true);
-            }
-        }
-        else
-        {
-            if (player.GetAnimator)
-            {
-                animator.SetBool("Run", false);
-                animator.SetBool("Idle", true);
+                animator.SetTrigger("Run");
             }
         }
     }
 
     private void Jump()
     {
-        if (player.Jump && !player.isJump && !player.isClimbing && !player.getHit)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            player.isJump = true;
+            print("Jumping");
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2 * player.jumpForce);
+            if (player.GetAnimator)
             {
-                player.isJump = true;
-                print("Jumping");
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, player.jumpForce);
-                if (player.GetAnimator)
-                {
-                    animator.SetBool("Idle", false);
-                    animator.SetTrigger("Jump");
-                }
+                animator.SetTrigger("Jump");
+            }
 
-                if (player.GetAudio)
-                {
-                    player.PlayJumpSFX();
-                }
+            if (player.GetAudio)
+            {
+                player.PlayJumpSFX();
             }
         }
     }

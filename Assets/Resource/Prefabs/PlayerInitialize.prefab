@@ -103,7 +103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4302495910035130938
 Transform:
   m_ObjectHideFlags: 0
@@ -153,13 +153,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 10
   runSpeed: 8
-  hitBackForce: 5
+  hitBackForce: 10
   hitCount: 5
   _rigidbody2D: {fileID: 0}
   sfxSource: {fileID: 0}
   audioManager: {fileID: 0}
   nextLevelPosition: {fileID: 0}
   background: {fileID: 0}
+  upKey: {fileID: 0}
+  downKey: {fileID: 0}
+  rightKey: {fileID: 0}
+  leftKey: {fileID: 0}
+  spaceKey: {fileID: 0}
   playerLine: {fileID: 21300000, guid: d31b5df684121814cbe84659d5780398, type: 3}
   playerFullColor: {fileID: 21300000, guid: a6ed4d9637bdb364ebb64b868b3ae160, type: 3}
   backgroundLine: {fileID: 21300000, guid: 90470a2598d69ec4e81419344c2c190d, type: 3}
@@ -170,6 +175,7 @@ MonoBehaviour:
   deadSFX: {fileID: 8300000, guid: a9e925ca095e74c6781bc9cceafc6743, type: 3}
   isJump: 0
   isClimbing: 0
+  getHit: 0
   getLeftKey: 0
   getJump: 0
   getClimb: 0
@@ -177,7 +183,6 @@ MonoBehaviour:
   getAudio: 0
   getBackgroundColor: 0
   getRestart: 0
-  getHit: 0
 --- !u!114 &4302495910035130919
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     [SerializeField] AudioSource audioManager;
     [SerializeField] private Transform nextLevelPosition;
     [SerializeField] private SpriteRenderer background;
+    [SerializeField] private GameObject upKey;
+    [SerializeField] private GameObject downKey;
+    [SerializeField] private GameObject rightKey;
+    [SerializeField] private GameObject leftKey;
+    [SerializeField] private GameObject spaceKey;
+
 
     [Header("圖片")]
     [SerializeField] private Sprite playerLine;
@@ -121,14 +127,39 @@ public class Player : MonoBehaviour
         audioManager.enabled = false;
         transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerLine;
         background.sprite = backgroundLine;
+        rightKey.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isJump)
+        if (getLeftKey)
         {
+            leftKey.SetActive(true);
+        }
+        else
+        {
+            leftKey.SetActive(false);
+        }
 
+        if (Climb)
+        {
+            upKey.SetActive(true);
+            downKey.SetActive(true);
+        }
+        else
+        {
+            upKey.SetActive(false);
+            downKey.SetActive(false);
+        }
+
+        if (Jump)
+        {
+            spaceKey.SetActive(true);
+        }
+        else
+        {
+            spaceKey.SetActive(false);
         }
 
         if (isClimbing)
@@ -241,7 +272,15 @@ public class Player : MonoBehaviour
         {
             isClimbing = false;
             print("StopClimbing");
-            _rigidbody2D.velocity = new Vector2(0, jumpForce);
+            if (other.transform.position.y>transform.position.y)
+            {
+                _rigidbody2D.velocity = new Vector2(0, -jumpForce);
+            }
+            else
+            {
+                _rigidbody2D.velocity = new Vector2(0, jumpForce);
+            }
+
 
         }
     }
