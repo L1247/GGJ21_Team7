@@ -12,6 +12,6 @@ public class OnTriggerPlayAudio  : MonoBehaviour
     private void OnDestroy()
     {
         var audioSource = FindObjectOfType<AudioSource>();
-        audioSource.PlayOneShot(_audioClip);
+        audioSource?.PlayOneShot(_audioClip);
     }
 }
