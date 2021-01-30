@@ -85,7 +85,7 @@ public class AIController : MonoBehaviour
         }
         else
         {
-            transform.localScale = new Vector2(negativeLocalScale, positiveLocalScale);
+            transform.localScale = new Vector2(-negativeLocalScale, positiveLocalScale);
             warmIcon.flipX = true;
         }
 
@@ -105,7 +105,7 @@ public class AIController : MonoBehaviour
         else
         {
             transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
-            transform.localScale = new Vector2(negativeLocalScale, positiveLocalScale);
+            transform.localScale = new Vector2(-negativeLocalScale, positiveLocalScale);
             warmIcon.flipX = true;
         }
 
