@@ -81,10 +81,12 @@ public class AIController : MonoBehaviour
         if (IsPlayerOnRight())
         {
             transform.localScale = new Vector2(positiveLocalScale, positiveLocalScale);
+            warmIcon.flipX = false;
         }
         else
         {
             transform.localScale = new Vector2(negativeLocalScale, positiveLocalScale);
+            warmIcon.flipX = true;
         }
 
         animator.SetBool("IsWalk", true);
@@ -98,11 +100,13 @@ public class AIController : MonoBehaviour
         {
             transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
             transform.localScale = new Vector2(positiveLocalScale, positiveLocalScale);
+            warmIcon.flipX = false;
         }
         else
         {
             transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
             transform.localScale = new Vector2(negativeLocalScale, positiveLocalScale);
+            warmIcon.flipX = true;
         }
 
         animator.SetBool("IsWalk", true);
