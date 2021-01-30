@@ -1,6 +1,9 @@
 {
     "name": "Main",
-    "references": [],
+    "references": [
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:c39bb3fa217ddf44d869d73e07e66616"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
