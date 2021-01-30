@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     [Header("判斷腳色狀態")]
     public bool isJump;
     public bool isClimbing;
+    public bool getHit;
 
     [Header("獲得能力")]
     [SerializeField] bool getLeftKey;
@@ -101,14 +102,7 @@ public class Player : MonoBehaviour
         set => getLight = value;
     }
 
-    [SerializeField] private bool getHit;
 
-
-    public bool GETHit
-    {
-        get => getHit;
-        set => getHit = value;
-    }
 
     void Start()
     {
@@ -275,7 +269,7 @@ public class Player : MonoBehaviour
 
     public void GetHit(Collider2D other)
     {
-        GETHit = true;
+        getHit = true;
         if (other.transform.position.x> transform.position.x)
         {
             _rigidbody2D.velocity = new Vector2(-hitBackForce, 0);
@@ -336,7 +330,7 @@ public class Player : MonoBehaviour
     IEnumerator HitBack()
     {
         yield return new WaitForSeconds(1f);
-        GETHit = false;
+        getHit = false;
     }
 
 }

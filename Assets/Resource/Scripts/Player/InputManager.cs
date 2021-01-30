@@ -19,13 +19,19 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         Jump();
+        if (!player.isClimbing && !player.getHit)
+        {
+            GoRight();
+            if (player.LeftKey)
+            {
+                GoLeft();
+            }
+        }
 
-        GoLeft();
 
-        GoRight();
+
 
         Climb();
-
     }
 
     private void Climb()
@@ -37,15 +43,7 @@ public class InputManager : MonoBehaviour
                 transform.localPosition += new Vector3(0, Time.deltaTime * player.runSpeed, 0);
                 if (player.GetAnimator)
                 {
-                    animator.SetBool("Climb", true);
-                }
-            }
-            else
-            {
-                if (player.GetAnimator)
-                {
-                    animator.SetBool("Climb", false);
-                    animator.SetTrigger("Idle");
+                    animator.SetTrigger("Run");
                 }
             }
 
@@ -54,15 +52,7 @@ public class InputManager : MonoBehaviour
                 transform.localPosition -= new Vector3(0, Time.deltaTime * player.runSpeed, 0);
                 if (player.GetAnimator)
                 {
-                    animator.SetBool("Climb", true);
-                }
-            }
-            else
-            {
-                if (player.GetAnimator)
-                {
-                    animator.SetBool("Climb", false);
-                    animator.SetTrigger("Idle");
+                    animator.SetTrigger("Run");
                 }
             }
         }
@@ -70,12 +60,13 @@ public class InputManager : MonoBehaviour
 
     private void GoRight()
     {
-        if (Input.GetKey(KeyCode.RightArrow) && !player.isClimbing && !player.GETHit)
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.localPosition += new Vector3(Time.deltaTime * player.runSpeed, 0, 0);
             transform.localScale = new Vector3(1, 1, 1);
             if (player.GetAnimator)
             {
+                animator.SetBool("Idle", false);
                 animator.SetBool("Run", true);
             }
         }
@@ -84,46 +75,45 @@ public class InputManager : MonoBehaviour
             if (player.GetAnimator)
             {
                 animator.SetBool("Run", false);
-                animator.SetTrigger("Idle");
+                animator.SetBool("Idle", true);
             }
         }
     }
 
     private void GoLeft()
     {
-        if (player.LeftKey)
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (Input.GetKey(KeyCode.LeftArrow) && !player.isClimbing && !player.GETHit)
+            transform.localPosition -= new Vector3(Time.deltaTime * player.runSpeed, 0, 0);
+            transform.localScale = new Vector3(-1, 1, 1);
+            if (player.GetAnimator)
             {
-                transform.localPosition -= new Vector3(Time.deltaTime * player.runSpeed, 0, 0);
-                transform.localScale = new Vector3(-1, 1, 1);
-                if (player.GetAnimator)
-                {
-                    animator.SetBool("Run", true);
-                }
+                animator.SetBool("Idle", false);
+                animator.SetBool("Run", true);
             }
-            else
+        }
+        else
+        {
+            if (player.GetAnimator)
             {
-                if (player.GetAnimator)
-                {
-                    animator.SetBool("Run", false);
-                    animator.SetTrigger("Idle");
-                }
+                animator.SetBool("Run", false);
+                animator.SetBool("Idle", true);
             }
         }
     }
 
     private void Jump()
     {
-        if (player.Jump && !player.isJump && !player.isClimbing && !player.GETHit)
+        if (player.Jump && !player.isJump && !player.isClimbing && !player.getHit)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 player.isJump = true;
                 print("Jumping");
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2 * player.jumpForce);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, player.jumpForce);
                 if (player.GetAnimator)
                 {
+                    animator.SetBool("Idle", false);
                     animator.SetTrigger("Jump");
                 }
 
