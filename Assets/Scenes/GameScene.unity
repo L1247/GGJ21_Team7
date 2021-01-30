@@ -16719,5 +16719,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Actor
       objectReference: {fileID: 0}
+    - target: {fileID: 345388670327145560, guid: bb822785fe7601a4d81bf041dd8b080b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 345388670327145564, guid: bb822785fe7601a4d81bf041dd8b080b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 345388670327145566, guid: bb822785fe7601a4d81bf041dd8b080b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 345388670327145567, guid: bb822785fe7601a4d81bf041dd8b080b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb822785fe7601a4d81bf041dd8b080b, type: 3}
