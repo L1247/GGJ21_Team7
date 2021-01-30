@@ -12,7 +12,6 @@ public class EndSceneScript : MonoBehaviour
     Vector2 v2Scale;
     Vector2 v2AddForce;
     float fSpeed=10;
-    float fAddForceY = 8.5f;
     bool isGameEnd;
     bool isOnFloor;
     // Start is called before the first frame update
@@ -29,7 +28,6 @@ public class EndSceneScript : MonoBehaviour
         PlayerMove();
         AnimatorRun();
     }
-    
     void AnimatorRun()
     {
         if (isGameEnd && isOnFloor)
