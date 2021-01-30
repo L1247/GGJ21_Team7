@@ -295,8 +295,8 @@ GameObject:
   - component: {fileID: 345388670327145567}
   - component: {fileID: 345388670327145560}
   m_Layer: 0
-  m_Name: Actor
-  m_TagString: Untagged
+  m_Name: Actor_Full
+  m_TagString: Player
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,6 +341,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 345388669512031424}
   GroundCheck: {fileID: 345388669569065452}
   LadderCheck: {fileID: 345388670515164968}
+  _collections: {fileID: 0}
 --- !u!50 &345388670327145555
 Rigidbody2D:
   serializedVersion: 4

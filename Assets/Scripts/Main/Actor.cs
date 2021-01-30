@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Actor : MonoBehaviour
 {
@@ -25,6 +27,9 @@ public class Actor : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField]
+    private Transform _collections;
+
+    [SerializeField]
     private Transform GroundCheck;
 
     [SerializeField]
@@ -33,6 +38,18 @@ public class Actor : MonoBehaviour
 #endregion
 
 #region Public Methods
+
+    public void AddComponent(Type type , Sprite featureSprite)
+    {
+        var component     = gameObject.GetComponent(type);
+        var monoBehaviour = component as MonoBehaviour;
+        monoBehaviour.enabled = true;
+        var go = new GameObject(type.Name);
+        go.transform.parent = _collections;
+        var image = go.AddComponent<Image>();
+        image.raycastTarget = false;
+        image.sprite        = featureSprite;
+    }
 
     public void AddMovementX(float x)
     {
