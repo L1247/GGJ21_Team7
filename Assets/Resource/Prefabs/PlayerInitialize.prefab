@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 4
   runSpeed: 8
+  hitCount: 5
   _rigidbody2D: {fileID: 0}
   sfxSource: {fileID: 0}
   audioManager: {fileID: 0}
@@ -165,6 +166,7 @@ MonoBehaviour:
   jumpSFX: {fileID: 8300000, guid: 4f13633ea56974e6dbf63eb99fa6c851, type: 3}
   hitSFX: {fileID: 8300000, guid: 0d3def65994b84d04b8791e02beb2391, type: 3}
   powerSFX: {fileID: 8300000, guid: d73b73743ea434d9b98c5c0b04b51e3a, type: 3}
+  deadSFX: {fileID: 8300000, guid: a9e925ca095e74c6781bc9cceafc6743, type: 3}
   isJump: 0
   isClimbing: 0
   getLeftKey: 0

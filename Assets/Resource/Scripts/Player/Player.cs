@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -8,6 +10,11 @@ public class Player : MonoBehaviour
     // [SerializeField] private float jumpColdTime;
     public float jumpForce;
     public float runSpeed;
+    [SerializeField] private int hitCount;
+    public int PlayerHitCount
+    {
+        get => hitCount;
+    }
 
     [Header("掛載物件")]
     [SerializeField] private Rigidbody2D _rigidbody2D;
@@ -28,6 +35,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip jumpSFX;
     [SerializeField] private AudioClip hitSFX;
     [SerializeField] private AudioClip powerSFX;
+    [SerializeField] private AudioClip deadSFX;
 
     [Header("判斷腳色狀態")]
     public bool isJump;
@@ -77,6 +85,8 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool getLight;
+
+
     public bool GetLight
     {
         get => getLight;
@@ -98,6 +108,8 @@ public class Player : MonoBehaviour
         sfxSource = GetComponent<AudioSource>();
         sfxSource.enabled = false;
         audioManager.enabled = false;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerLine;
+        background.sprite = backgroundLine;
     }
 
     // Update is called once per frame
@@ -118,16 +130,16 @@ public class Player : MonoBehaviour
             _rigidbody2D.gravityScale=1;
         }
 
-        if (!GetBackgroundColor)
-        {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerLine;
-            background.sprite = backgroundLine;
-        }
-        else
-        {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerFullColor;
-            background.sprite = backgroundFullColor;
-        }
+        // if (!GetBackgroundColor)
+        // {
+        //     transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerLine;
+        //     background.sprite = backgroundLine;
+        // }
+        // else
+        // {
+        //     transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerFullColor;
+        //     background.sprite = backgroundFullColor;
+        // }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -141,6 +153,10 @@ public class Player : MonoBehaviour
                 isClimbing = true;
                 // _rigidbody2D.velocity = new Vector2(0, jumpForce / 2);
             }
+        }
+        if (other.tag=="Enemy")
+        {
+            GetHit();
         }
 
         if (other.tag=="Item")
@@ -160,7 +176,7 @@ public class Player : MonoBehaviour
                     break;
                 case ItemType.Climb:
                     Climb = true;
-                    print("GetJump");
+                    print("GetClimb");
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Animation:
@@ -180,6 +196,8 @@ public class Player : MonoBehaviour
                 case ItemType.BackgroundColor:
                     GetBackgroundColor = true;
                     print("GetColor");
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerFullColor;
+                    background.sprite = backgroundFullColor;
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Light:
@@ -194,7 +212,6 @@ public class Player : MonoBehaviour
                 default:
                     break;
             }
-
             if (GetAudio)
             {
                 PlayPowerSFX();
@@ -208,7 +225,7 @@ public class Player : MonoBehaviour
         {
             isClimbing = false;
             print("StopClimbing");
-            _rigidbody2D.velocity = new Vector2(0, jumpForce / 2);
+            _rigidbody2D.velocity = new Vector2(0, jumpForce);
 
         }
     }
@@ -234,9 +251,29 @@ public class Player : MonoBehaviour
         sfxSource.PlayOneShot(jumpSFX);
     }
 
-    public void PlayHitSFX()
+    public void GetHit()
     {
-        sfxSource.PlayOneShot(hitSFX);
+        hitCount--;
+        print("Current hit is : "+ hitCount);
+        if (GetAudio)
+        {
+            sfxSource.PlayOneShot(hitSFX);
+        }
+
+        if (hitCount<=0)
+        {
+            print("Dead");
+            if (GetAudio)
+            {
+                PlayDeadSFX();
+            }
+            StartCoroutine(BackToTitle());
+        }
+    }
+
+    private void PlayDeadSFX()
+    {
+        sfxSource.PlayOneShot(deadSFX);
     }
 
     public void PlayPowerSFX()
@@ -247,6 +284,12 @@ public class Player : MonoBehaviour
     public void TeleportToNextLevel()
     {
         transform.position = nextLevelPosition.position;
+    }
+
+    IEnumerator BackToTitle()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(0);
     }
 
 }
