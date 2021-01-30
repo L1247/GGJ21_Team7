@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEditor.Animations;
+using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
@@ -46,6 +48,19 @@ public class InputManager : MonoBehaviour
         if (player.isClimbing)
         {
             Climb();
+        }
+
+        if (player.GetLight)
+        {
+            SwitchLight();
+        }
+    }
+
+    private void SwitchLight()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+
         }
     }
 
@@ -98,7 +113,6 @@ public class InputManager : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
             if (player.GetAnimator)
             {
-                print(player.GetAnimator);
                 if (!player.GetBackgroundColor)
                 {
                     animator.SetTrigger("Run");

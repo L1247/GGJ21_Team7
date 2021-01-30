@@ -166,6 +166,9 @@ MonoBehaviour:
   rightKey: {fileID: 0}
   leftKey: {fileID: 0}
   spaceKey: {fileID: 0}
+  audioIcon: {fileID: 0}
+  restartIcon: {fileID: 0}
+  flashLightIcon: {fileID: 0}
   healthStars:
   - {fileID: 0}
   - {fileID: 0}
@@ -176,8 +179,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7d095782f5beb0046b377cffe1bfe6ab, type: 3}
   - {fileID: 21300000, guid: 6b7bd5cb05d03544c87e386132319e2e, type: 3}
   backgroundSprite:
-  - {fileID: 21300000, guid: 320dbbf7f4e9f1a49808a31787f35da8, type: 3}
-  - {fileID: 21300000, guid: 92953a8c5430d5e47a1d38929cc94846, type: 3}
+  - {fileID: 21300000, guid: 26852d7e069351242a9c85baf4c556a8, type: 3}
+  - {fileID: 21300000, guid: 0b02bb2818b242a468d51e459eb2b2f3, type: 3}
+  - {fileID: 21300000, guid: cdcddb8dff788034bb170a2c73d34d2c, type: 3}
   upSprite:
   - {fileID: 21300000, guid: 3be84356070c82d40b319f47291882f3, type: 3}
   - {fileID: 21300000, guid: 6dbc9329b726d24439e7903d351edabf, type: 3}
@@ -193,6 +197,15 @@ MonoBehaviour:
   spaceSprite:
   - {fileID: 21300000, guid: 15f0fa05702992b4fa9717ec769e331d, type: 3}
   - {fileID: 21300000, guid: a4725c74375a0f14ca813cb3f8c8a786, type: 3}
+  audioSprite:
+  - {fileID: 21300000, guid: 7c6afa757192b774590282271c2a7ccc, type: 3}
+  - {fileID: 21300000, guid: efab7ceaed20e5a4283677014de0cdf2, type: 3}
+  restartSprite:
+  - {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}
+  - {fileID: 21300000, guid: e0bd1a46a2ad9c3499b53d36f2227ce1, type: 3}
+  flashLightSprite:
+  - {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}
+  - {fileID: 21300000, guid: e0bd1a46a2ad9c3499b53d36f2227ce1, type: 3}
   healthStar:
   - {fileID: 21300000, guid: e0bd1a46a2ad9c3499b53d36f2227ce1, type: 3}
   - {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}
@@ -210,6 +223,7 @@ MonoBehaviour:
   getAudio: 0
   getBackgroundColor: 0
   getRestart: 0
+  getLight: 0
 --- !u!114 &4302495910035130919
 MonoBehaviour:
   m_ObjectHideFlags: 0
