@@ -140,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 6155105205582746499}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6155105205705678821}
   m_RootOrder: 0
@@ -185,7 +185,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e83270ffa5847254da9c71a608e8a288, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d1513107e5a9a148810c33f90f6ffdc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -226,7 +226,7 @@ Transform:
   m_GameObject: {fileID: 6155105205705678831}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.18, y: 1.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.37805, y: 0.37805, z: 0.37805}
   m_Children:
   - {fileID: 6155105205582746501}
   m_Father: {fileID: 7767908857859620888}
@@ -272,7 +272,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 84ce2f114ad12bd4ebafc77060220324, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c9ce083da1fd784a849bc246df6d036, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -291,7 +291,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6155105205705678831}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8638b610a0b6bcb4eb40edcdd7331963, type: 2}
   m_CullingMode: 0
@@ -316,7 +316,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.5}
-  m_Size: {x: 1, y: 1.5}
+  m_Size: {x: 5.39, y: 1.5}
   m_Direction: 0
 --- !u!50 &6155105205705678817
 Rigidbody2D:
@@ -359,8 +359,8 @@ MonoBehaviour:
   leftWall: {fileID: 6155105205215660121}
   stayTime: 3
   warmIcon: {fileID: 6155105205582746498}
-  questionIcon: {fileID: 21300000, guid: e83270ffa5847254da9c71a608e8a288, type: 3}
-  exclamationIcon: {fileID: 21300000, guid: 60d1eeb0595a18c42ad29db1e981e9c1, type: 3}
+  questionIcon: {fileID: 21300000, guid: 6d1513107e5a9a148810c33f90f6ffdc, type: 3}
+  exclamationIcon: {fileID: 21300000, guid: 19acff4f456cb6149bcd100c7b7a173f, type: 3}
 --- !u!1 &6155105206417127620
 GameObject:
   m_ObjectHideFlags: 0
