@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioSource sfxSource;
     [SerializeField] AudioSource audioManager;
     [SerializeField] private Transform nextLevelPosition;
+    [SerializeField] private Transform spawnPoint;
     [SerializeField] private SpriteRenderer background;
     [SerializeField] private GameObject upKey;
     [SerializeField] private GameObject downKey;
@@ -31,10 +33,13 @@ public class Player : MonoBehaviour
 
 
     [Header("圖片")]
-    [SerializeField] private Sprite playerLine;
-    [SerializeField] private Sprite playerFullColor;
-    [SerializeField] private Sprite backgroundLine;
-    [SerializeField] private Sprite backgroundFullColor;
+    [SerializeField] private Sprite[] playerSprite;
+    [SerializeField] private Sprite[] backgroundSprite;
+    [SerializeField] private Sprite[] upSprite;
+    [SerializeField] private Sprite[] downSprite;
+    [SerializeField] private Sprite[] rightSprite;
+    [SerializeField] private Sprite[] leftSprite;
+    [SerializeField] private Sprite[] spaceSprite;
 
 
 
@@ -125,8 +130,8 @@ public class Player : MonoBehaviour
         sfxSource = GetComponent<AudioSource>();
         sfxSource.enabled = false;
         audioManager.enabled = false;
-        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerLine;
-        background.sprite = backgroundLine;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[0];
+        background.sprite = backgroundSprite[0];
         rightKey.SetActive(true);
         upKey.SetActive(false);
         downKey.SetActive(false);
@@ -137,19 +142,43 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (getLeftKey)
+        if (!GetBackgroundColor)
+        {
+            rightKey.GetComponent<Image>().sprite = rightSprite[0];
+        }
+        else
+        {
+            rightKey.GetComponent<Image>().sprite = rightSprite[1];
+        }
+        if (getLeftKey && !GetBackgroundColor)
         {
             leftKey.SetActive(true);
+            leftKey.GetComponent<Image>().sprite = leftSprite[0];
+        }
+        else if(getLeftKey && GetBackgroundColor)
+        {
+            leftKey.SetActive(true);
+            leftKey.GetComponent<Image>().sprite = leftSprite[1];
         }
         else
         {
             leftKey.SetActive(false);
         }
 
-        if (Climb)
+        if (Climb && !GetBackgroundColor)
         {
             upKey.SetActive(true);
+            upKey.GetComponent<Image>().sprite = upSprite[0];
             downKey.SetActive(true);
+            downKey.GetComponent<Image>().sprite = downSprite[0];
+
+        }
+        else if (Climb && GetBackgroundColor)
+        {
+            upKey.SetActive(true);
+            upKey.GetComponent<Image>().sprite = upSprite[1];
+            downKey.SetActive(true);
+            downKey.GetComponent<Image>().sprite = downSprite[1];
         }
         else
         {
@@ -157,9 +186,15 @@ public class Player : MonoBehaviour
             downKey.SetActive(false);
         }
 
-        if (Jump)
+        if (Jump && !GetBackgroundColor)
         {
             spaceKey.SetActive(true);
+            spaceKey.GetComponent<Image>().sprite = spaceSprite[0];
+        }
+        else if (Jump && GetBackgroundColor)
+        {
+            spaceKey.SetActive(true);
+            spaceKey.GetComponent<Image>().sprite = spaceSprite[1];
         }
         else
         {
@@ -242,8 +277,8 @@ public class Player : MonoBehaviour
                 case ItemType.BackgroundColor:
                     GetBackgroundColor = true;
                     print("GetColor");
-                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerFullColor;
-                    background.sprite = backgroundFullColor;
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[1];
+                    background.sprite = backgroundSprite[1];
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Light:

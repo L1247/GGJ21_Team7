@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4302495909961000654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 4302495910035130938}
   m_RootOrder: 0
@@ -159,16 +159,34 @@ MonoBehaviour:
   sfxSource: {fileID: 0}
   audioManager: {fileID: 0}
   nextLevelPosition: {fileID: 0}
+  spawnPoint: {fileID: 0}
   background: {fileID: 0}
   upKey: {fileID: 0}
   downKey: {fileID: 0}
   rightKey: {fileID: 0}
   leftKey: {fileID: 0}
   spaceKey: {fileID: 0}
-  playerLine: {fileID: 21300000, guid: 7d095782f5beb0046b377cffe1bfe6ab, type: 3}
-  playerFullColor: {fileID: 21300000, guid: 6b7bd5cb05d03544c87e386132319e2e, type: 3}
-  backgroundLine: {fileID: 21300000, guid: 90470a2598d69ec4e81419344c2c190d, type: 3}
-  backgroundFullColor: {fileID: 21300000, guid: bab375bdda5c00d4bbdfed666a2350c0, type: 3}
+  playerSprite:
+  - {fileID: 21300000, guid: 7d095782f5beb0046b377cffe1bfe6ab, type: 3}
+  - {fileID: 21300000, guid: 6b7bd5cb05d03544c87e386132319e2e, type: 3}
+  backgroundSprite:
+  - {fileID: 21300000, guid: 320dbbf7f4e9f1a49808a31787f35da8, type: 3}
+  - {fileID: 21300000, guid: 92953a8c5430d5e47a1d38929cc94846, type: 3}
+  upSprite:
+  - {fileID: 21300000, guid: 3be84356070c82d40b319f47291882f3, type: 3}
+  - {fileID: 21300000, guid: 6dbc9329b726d24439e7903d351edabf, type: 3}
+  downSprite:
+  - {fileID: 21300000, guid: a9b4ced8fe6fc6642b652db42e5e8970, type: 3}
+  - {fileID: 21300000, guid: b914448516ab16344bf3591b47675523, type: 3}
+  rightSprite:
+  - {fileID: 21300000, guid: 301acad9cd31dc6469e76ad6ca868e0e, type: 3}
+  - {fileID: 21300000, guid: cbeaac0ab4469b24c9a85b4d1cfa9953, type: 3}
+  leftSprite:
+  - {fileID: 21300000, guid: ffdba63eb5d893447958eb8d2353af2a, type: 3}
+  - {fileID: 21300000, guid: 2b28ce418ba0d9c4ea836bbca4eddec5, type: 3}
+  spaceSprite:
+  - {fileID: 21300000, guid: 15f0fa05702992b4fa9717ec769e331d, type: 3}
+  - {fileID: 21300000, guid: a4725c74375a0f14ca813cb3f8c8a786, type: 3}
   jumpSFX: {fileID: 8300000, guid: 4f13633ea56974e6dbf63eb99fa6c851, type: 3}
   hitSFX: {fileID: 8300000, guid: 0d3def65994b84d04b8791e02beb2391, type: 3}
   powerSFX: {fileID: 8300000, guid: d73b73743ea434d9b98c5c0b04b51e3a, type: 3}
