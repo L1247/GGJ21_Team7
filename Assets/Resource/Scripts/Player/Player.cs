@@ -7,16 +7,11 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     [Header("行動參數")]
-    // [SerializeField] float timer = 0;
-    // [SerializeField] private float jumpColdTime;
+    [SerializeField] private int whitchSceneToLoad;
     public float jumpForce;
     public float runSpeed;
     [SerializeField] private float hitBackForce;
     [SerializeField] private int hitCount;
-    public int PlayerHitCount
-    {
-        get => hitCount;
-    }
 
     [Header("掛載物件")]
     [SerializeField] private Rigidbody2D _rigidbody2D;
@@ -118,6 +113,7 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool getLight;
+
 
 
     public bool GetLight
@@ -467,7 +463,7 @@ public class Player : MonoBehaviour
 
             if (GetRestart)
             {
-                StartCoroutine(BackToTitle());
+                StartCoroutine(BackTo(whitchSceneToLoad));
             }
             else
             {
@@ -493,18 +489,11 @@ public class Player : MonoBehaviour
         transform.position = nextLevelPosition.position;
     }
 
-    IEnumerator BackToTitle()
+    IEnumerator BackTo(int index)
     {
+        index = whitchSceneToLoad;
         yield return new WaitForSeconds(1f);
-        if (SceneManager.GetActiveScene().buildIndex==1)
-        {
-            SceneManager.LoadScene(1);
-
-        }
-        else if(SceneManager.GetActiveScene().buildIndex==2)
-        {
-            SceneManager.LoadScene(2);
-        }
+        SceneManager.LoadScene(index);
     }
 
     IEnumerator HitBack()
