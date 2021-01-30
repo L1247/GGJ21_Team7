@@ -13,6 +13,9 @@ public class AIController : MonoBehaviour
     [SerializeField] float positiveLocalScale;
     [SerializeField] float negativeLocalScale;
 
+    [Header("抓取物件")]
+    [SerializeField] Player playerScript;
+
     [Header("移動速度")]
     [SerializeField] float moveSpeed = 1.5f;
     [Header("加速倍數")]
@@ -62,7 +65,7 @@ public class AIController : MonoBehaviour
 
     private void Update()
     {
-        if (time >= stayTime)
+        if (time >= stayTime && !playerScript.getHit)
         {
             if (IsInChaseRange())
             {
@@ -110,7 +113,8 @@ public class AIController : MonoBehaviour
             warmIcon.flipX = true;
         }
 
-        animator.SetBool("IsWalk", true);
+        animator.SetBool("IsChase", true);
+        animator.SetBool("IsWalk", false);
 
         warmIcon.sprite = exclamationIcon;
     }
@@ -134,6 +138,7 @@ public class AIController : MonoBehaviour
         }
 
         animator.SetBool("IsWalk", true);
+        animator.SetBool("IsChase", false);
 
         warmIcon.sprite = questionIcon;
     }
