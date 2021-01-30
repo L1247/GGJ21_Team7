@@ -128,6 +128,10 @@ public class Player : MonoBehaviour
         transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerLine;
         background.sprite = backgroundLine;
         rightKey.SetActive(true);
+        upKey.SetActive(false);
+        downKey.SetActive(false);
+        leftKey.SetActive(false);
+        spaceKey.SetActive(false);
     }
 
     // Update is called once per frame
