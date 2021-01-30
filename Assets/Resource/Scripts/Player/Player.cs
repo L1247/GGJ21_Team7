@@ -354,6 +354,17 @@ public class Player : MonoBehaviour
     public void GetHit(Collider2D other)
     {
         getHit = true;
+        if (GetAnimator)
+        {
+            if (!GetBackgroundColor)
+            {
+                GetComponent<Animator>().SetTrigger("Hurt");
+            }
+            else
+            {
+                GetComponent<Animator>().SetTrigger("Hurt_C");
+            }
+        }
         if (other.transform.position.x> transform.position.x)
         {
             _rigidbody2D.velocity = new Vector2(-hitBackForce, 0);
