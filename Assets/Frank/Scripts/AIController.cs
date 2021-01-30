@@ -1,24 +1,34 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
     #region 宣告
     [Header("移動速度")]
-    [SerializeField] float moveSpeed = 2f;
-    [Header("偵測距離")]
-    [SerializeField] float distance = 5f;
-
+    [SerializeField] float moveSpeed = 1.5f;
+    [Header("加速倍數")]
+    [SerializeField] float speedModifier = 2f;
+    [Header("攻擊距離")]
+    [SerializeField] float attackDistance = 1.5f;
+    [Header("追趕距離")]
+    [SerializeField] float chaseDistance = 5f;
     [Header("巡邏範圍")]
     [SerializeField] Transform rightWall;
     [SerializeField] Transform leftWall;
-    [Header("停留時間")]
-    [SerializeField] float startStayTime = .1f;
+    [Header("停滯時間")]
+    [SerializeField] float stayTime = 3;
+
+    [Header("放置圖片")]
+    [SerializeField] SpriteRenderer warmIcon;
+    [SerializeField] Sprite questionIcon;
+    [SerializeField] Sprite exclamationIcon;
 
     private GameObject player;
     private Animator animator;
     private SpriteRenderer sprite;
 
     private bool IsMoveRight;
+    private float time;
     #endregion
 
     private void Start()
@@ -30,19 +40,42 @@ public class AIController : MonoBehaviour
 
     private void Update()
     {
-        if (IsInRange())
+        if (time >= stayTime)
         {
-            FollowBehaviour();
+            if (IsInChaseRange())
+            {
+                if (IsInAttackRange())
+                {
+                    AttackBehaviour();
+                }
+                else
+                {
+                    FollowBehaviour();
+                }
+            }
+            else
+            {
+                PatrolBehaviour();
+            }
         }
-        else
-        {
-            PatrolBehaviour();
-        }
+
+        UpdateTimer();
+    }
+
+    private void UpdateTimer()
+    {
+        time += Time.deltaTime;
+    }
+
+    private void AttackBehaviour()
+    {
+        time = 0;
+        animator.SetBool("IsWalk", false);
     }
 
     private void FollowBehaviour()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, transform.position.y), moveSpeed * speedModifier * Time.deltaTime);
 
         if (IsPlayerOnRight())
         {
@@ -52,6 +85,10 @@ public class AIController : MonoBehaviour
         {
             sprite.flipX = true;
         }
+
+        animator.SetBool("IsWalk", true);
+
+        warmIcon.sprite = exclamationIcon;
     }
 
     private void PatrolBehaviour()
@@ -66,11 +103,20 @@ public class AIController : MonoBehaviour
             transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
             sprite.flipX = true;
         }
+
+        animator.SetBool("IsWalk", true);
+
+        warmIcon.sprite = questionIcon;
     }
 
-    private bool IsInRange()
+    private bool IsInChaseRange()
     {
-        return Vector2.Distance(transform.position, player.transform.position) < distance;
+        return Vector2.Distance(transform.position, player.transform.position) < chaseDistance;
+    }
+
+    private bool IsInAttackRange()
+    {
+        return Vector2.Distance(transform.position, player.transform.position) < attackDistance;
     }
 
     private bool IsPlayerOnRight()
@@ -89,6 +135,7 @@ public class AIController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, distance);
+        Gizmos.DrawWireSphere(transform.position, chaseDistance);
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
 }
