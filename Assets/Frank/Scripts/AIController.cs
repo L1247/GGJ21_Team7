@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 
+enum DirectionType
+{
+    Right,
+    Left
+}
+
 public class AIController : MonoBehaviour
 {
-    #region 宣告
+    #region 變數宣告
     [Header("初始值")]
     [SerializeField] float positiveLocalScale;
     [SerializeField] float negativeLocalScale;
@@ -29,14 +35,29 @@ public class AIController : MonoBehaviour
     private GameObject player;
     private Animator animator;
 
-    private bool IsMoveRight;
+    private bool isMoveRight;
     private float time;
+
+    private DirectionType directionType;
+    private int randomNumber;
     #endregion
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
+
+
+        randomNumber = Random.Range(0, 2);
+
+        if (randomNumber == 0)
+        {
+            directionType = DirectionType.Right;
+        }
+        else if (randomNumber == 1)
+        {
+            directionType = DirectionType.Left;
+        }
     }
 
     private void Update()
@@ -96,17 +117,20 @@ public class AIController : MonoBehaviour
 
     private void PatrolBehaviour()
     {
-        if (IsMoveRight)
+        switch (directionType)
         {
-            transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
-            transform.localScale = new Vector2(positiveLocalScale, positiveLocalScale);
-            warmIcon.flipX = false;
-        }
-        else
-        {
-            transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
-            transform.localScale = new Vector2(-negativeLocalScale, positiveLocalScale);
-            warmIcon.flipX = true;
+            case DirectionType.Right:
+                transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
+                transform.localScale = new Vector2(positiveLocalScale, positiveLocalScale);
+                warmIcon.flipX = false;
+                break;
+            case DirectionType.Left:
+                transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
+                transform.localScale = new Vector2(-negativeLocalScale, positiveLocalScale);
+                warmIcon.flipX = true;
+                break;
+            default:
+                break;
         }
 
         animator.SetBool("IsWalk", true);
@@ -133,7 +157,7 @@ public class AIController : MonoBehaviour
     {
         if (collision.tag == "Wall")
         {
-            IsMoveRight = !IsMoveRight;
+            isMoveRight = !isMoveRight;
         }
     }
 
