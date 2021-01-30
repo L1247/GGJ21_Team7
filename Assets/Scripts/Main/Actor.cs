@@ -4,6 +4,8 @@ public class Actor : MonoBehaviour
 {
 #region Private Variables
 
+    private bool _flip;
+
     private bool _isGrounded;
 
     private bool _isOnLadder;
@@ -20,6 +22,9 @@ public class Actor : MonoBehaviour
     private LayerMask ladderLayer;
 
     [SerializeField]
+    private SpriteRenderer _spriteRenderer;
+
+    [SerializeField]
     private Transform GroundCheck;
 
     [SerializeField]
@@ -31,6 +36,7 @@ public class Actor : MonoBehaviour
 
     public void AddMovementX(float x)
     {
+        _flip    =  x < 0;
         movement += Vector2.right * x;
     }
 
@@ -121,6 +127,11 @@ public class Actor : MonoBehaviour
         var y           = movementY * Time.fixedDeltaTime;
         var newVelocity = new Vector2(velocity.x , y);
         _rigidbody2D.velocity = newVelocity;
+    }
+
+    private void Update()
+    {
+        if (_spriteRenderer.flipX != _flip) _spriteRenderer.flipX = _flip;
     }
 
 #endregion
