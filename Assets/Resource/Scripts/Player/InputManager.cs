@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private Player   player;
+    [SerializeField] private Player player;
     [SerializeField] private Animator animator;
 
     void Start()
     {
-        player   = GetComponent<Player>();
+        player = GetComponent<Player>();
         animator = GetComponent<Animator>();
     }
 
@@ -23,9 +23,14 @@ public class InputManager : MonoBehaviour
                 GoLeft();
             }
 
-            if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+            if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow) && !player.GetBackgroundColor)
             {
-                animator.ResetTrigger("Run");
+                animator.SetTrigger("Idle");
+            }
+
+            if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow) && player.GetBackgroundColor)
+            {
+                animator.SetTrigger("Idle_C");
             }
         }
 
@@ -55,7 +60,6 @@ public class InputManager : MonoBehaviour
                 {
                     animator.SetTrigger("Climb_C");
                 }
-
             }
         }
 
@@ -87,7 +91,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.localPosition += new Vector3(Time.deltaTime * player.runSpeed, 0, 0);
-            transform.localScale    =  new Vector3(1,                                1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
             if (player.GetAnimator)
             {
                 if (!player.GetBackgroundColor)
@@ -98,7 +102,6 @@ public class InputManager : MonoBehaviour
                 {
                     animator.SetTrigger("Run_C");
                 }
-
             }
         }
     }
@@ -108,10 +111,14 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.localPosition -= new Vector3(Time.deltaTime * player.runSpeed, 0, 0);
-            transform.localScale    =  new Vector3(-1,                               1, 1);
-            if (player.GetAnimator)
+            transform.localScale = new Vector3(-1, 1, 1);
+            if (!player.GetBackgroundColor)
             {
                 animator.SetTrigger("Run");
+            }
+            else
+            {
+                animator.SetTrigger("Run_C");
             }
         }
     }
@@ -125,11 +132,14 @@ public class InputManager : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2 * player.jumpForce);
             if (player.GetAnimator)
             {
-                if (player.GetBackgroundColor)
+                if (!player.GetBackgroundColor)
                 {
-
+                    animator.SetTrigger("Jump");
                 }
-                animator.SetTrigger("Jump");
+                else
+                {
+                    animator.SetTrigger("Jump_C");
+                }
             }
 
             if (player.GetAudio)

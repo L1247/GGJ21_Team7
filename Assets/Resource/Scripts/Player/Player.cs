@@ -276,8 +276,9 @@ public class Player : MonoBehaviour
                     break;
                 case ItemType.BackgroundColor:
                     GetBackgroundColor = true;
+                    GetComponent<Animator>().SetTrigger("Idle_C");
                     print("GetColor");
-                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[1];
+                    // transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[1];
                     background.sprite = backgroundSprite[1];
                     Destroy(other.gameObject);
                     break;
@@ -378,6 +379,7 @@ public class Player : MonoBehaviour
             }
             else
             {
+                transform.GetChild(1).SetParent(background.transform);
                 gameObject.SetActive(false);
             }
 
@@ -402,7 +404,7 @@ public class Player : MonoBehaviour
     IEnumerator BackToTitle()
     {
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     IEnumerator HitBack()
