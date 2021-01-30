@@ -47,8 +47,9 @@ public class AIController : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        animator = GetComponent<Animator>();
+        player       = GameObject.FindGameObjectWithTag("Player");
+        playerScript = player.GetComponent<Player>();
+        animator     = GetComponent<Animator>();
 
 
         randomNumber = Random.Range(0, 2);
