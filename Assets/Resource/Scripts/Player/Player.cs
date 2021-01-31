@@ -491,6 +491,7 @@ public class Player : MonoBehaviour
         if (isDead)
         {
             print("Dead");
+            transform.DORotate(new Vector3(0 , 0 , -60) , 0.5f);
             if (GetAudio)
             {
                 PlayDeadSFX();
