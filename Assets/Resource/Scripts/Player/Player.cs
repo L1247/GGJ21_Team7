@@ -381,7 +381,7 @@ public class Player : MonoBehaviour
                     break;
                 case ItemType.Teleport:
                     print("Teleport to : " + nextLevelPosition.position);
-                    // TeleportToNextLevel();
+                    TeleportToScene(whichSceneToLoad+1);
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Icon:
@@ -496,9 +496,9 @@ public class Player : MonoBehaviour
         sfxSource.PlayOneShot(powerSFX);
     }
 
-    public void TeleportToNextLevel()
+    public void TeleportToScene(int index)
     {
-        transform.position = nextLevelPosition.position;
+        SceneManager.LoadScene(index);
     }
 
     IEnumerator BackTo(int index)
