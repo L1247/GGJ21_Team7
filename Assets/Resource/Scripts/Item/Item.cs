@@ -18,5 +18,6 @@ public enum ItemType
     Light,
     Restart,
     Teleport,
-    Icon
+    Icon,
+    Level2Teleport
 }
