@@ -441,6 +441,8 @@ public class Player : MonoBehaviour
     public void GetHit(Collider2D other)
     {
         getHit = true;
+        isJump = false;
+        isClimbing = false;
         if (GetAnimator)
         {
             GetComponent<Animator>().SetTrigger(!GetBackgroundColor ? "Hurt" : "Hurt_C");
