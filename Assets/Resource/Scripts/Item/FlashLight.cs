@@ -34,7 +34,11 @@ public class FlashLight : MonoBehaviour
     {
         if (other.gameObject.name=="暗格")
         {
-            other.gameObject.SetActive(false);
+            if (!isTurnOff)
+            {
+                other.gameObject.SetActive(false);
+            }
+
         }
     }
 }
