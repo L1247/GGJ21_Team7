@@ -49867,6 +49867,22 @@ PrefabInstance:
       propertyPath: audioIcon
       value: 
       objectReference: {fileID: 1661871984}
+    - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: flashLightSprite.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 84869e42d30ae9f42b66bfab27e8a7f0, type: 3}
+    - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: flashLightSprite.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 84869e42d30ae9f42b66bfab27e8a7f0, type: 3}
+    - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: restartSprite.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 7960089267ac3f245b5ef06a6a28d4bd, type: 3}
+    - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: restartSprite.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 7960089267ac3f245b5ef06a6a28d4bd, type: 3}
     - target: {fileID: 4302495910035130918, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: m_Name
       value: PlayerInitialize
