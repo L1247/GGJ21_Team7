@@ -382,7 +382,7 @@ public class Player : MonoBehaviour
                 case ItemType.Teleport:
                     print("Teleport to : " + whichSceneToLoad+1);
                     StartCoroutine(TeleportToScene(whichSceneToLoad+1));
-                    Destroy(other.gameObject);
+                    other.GetComponent<BoxCollider2D>().isTrigger = false;
                     break;
                 case ItemType.Icon:
                     isGetLogo = true;
@@ -392,7 +392,9 @@ public class Player : MonoBehaviour
                     if (isGetLogo)
                     {
                         StartCoroutine(TeleportToScene(whichSceneToLoad+1));
+                        other.GetComponent<BoxCollider2D>().isTrigger = false;
                     }
+
                     break;
                 default:
                     break;
