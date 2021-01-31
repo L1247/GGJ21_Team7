@@ -92,7 +92,7 @@ public class AIController : MonoBehaviour
 
     private void FollowBehaviour()
     {
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, transform.position.y), moveSpeed * speedModifier * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * speedModifier * Time.deltaTime);
 
         if (IsPlayerOnRight())
         {
