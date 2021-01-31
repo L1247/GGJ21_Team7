@@ -44,6 +44,11 @@ public class AIController : MonoBehaviour
         playerScript = player.GetComponent<Player>();
         animator = GetComponent<Animator>();
 
+        StartDirection();
+    }
+
+    private void StartDirection()
+    {
         randomNumber = Random.Range(0, 2);
 
         if (randomNumber == 0)
@@ -55,7 +60,17 @@ public class AIController : MonoBehaviour
             directionType = DirectionType.Left;
         }
 
-        FlipCharactor();
+        switch (directionType)
+        {
+            case DirectionType.Right:
+                isMoveRight = true;
+                break;
+            case DirectionType.Left:
+                isMoveRight = false;
+                break;
+            default:
+                break;
+        }
     }
 
     private void Update()
@@ -73,25 +88,6 @@ public class AIController : MonoBehaviour
         }
 
         WarmBehaviour();
-    }
-
-    private void FlipCharactor()
-    {
-        switch (directionType)
-        {
-            case DirectionType.Right:
-                transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
-                transform.localScale = new Vector2(positiveLocalScale, positiveLocalScale);
-                warmIcon.flipX = false;
-                break;
-            case DirectionType.Left:
-                transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
-                transform.localScale = new Vector2(-negativeLocalScale, positiveLocalScale);
-                warmIcon.flipX = true;
-                break;
-            default:
-                break;
-        }
     }
 
     private void FollowBehaviour()
