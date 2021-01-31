@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     [Header("判斷腳色狀態")] public bool isJump;
     public bool isClimbing;
     public bool getHit;
-    public bool isGetLogo;
+
 
     [Header("獲得能力")] [SerializeField] bool getLeftKey;
 
@@ -125,20 +125,21 @@ public class Player : MonoBehaviour
         get => getLight;
         set => getLight = value;
     }
+    public bool isGetLogo;
 
 
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         sfxSource = GetComponent<AudioSource>();
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            NoPowerPlayer();
-        }
-        else
-        {
-            FullPowerPlayer();
-        }
+        // if (SceneManager.GetActiveScene().buildIndex == 1)
+        // {
+        //     NoPowerPlayer();
+        // }
+        // else
+        // {
+        //     FullPowerPlayer();
+        // }
     }
 
 
@@ -440,6 +441,8 @@ public class Player : MonoBehaviour
     public void GetHit(Collider2D other)
     {
         getHit = true;
+        isJump = false;
+        isClimbing = false;
         if (GetAnimator)
         {
             GetComponent<Animator>().SetTrigger(!GetBackgroundColor ? "Hurt" : "Hurt_C");

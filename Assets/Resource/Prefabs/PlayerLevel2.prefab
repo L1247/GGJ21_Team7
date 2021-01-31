@@ -82,19 +82,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getJump
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getAudio
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getClimb
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getLight
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: jumpForce
@@ -106,15 +106,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getLeftKey
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getRestart
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getAnimator
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: hitBackForce
@@ -126,7 +126,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 320dbbf7f4e9f1a49808a31787f35da8, type: 3}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getBackgroundColor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: backgroundFullColor
@@ -150,7 +150,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}
     - target: {fileID: 4302495910035130918, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: m_Name
-      value: PlayerAllPower
+      value: PlayerLevel2
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130918, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: m_IsActive
