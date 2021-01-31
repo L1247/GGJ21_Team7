@@ -13,22 +13,15 @@ public class AIController : MonoBehaviour
     [SerializeField] float positiveLocalScale;
     [SerializeField] float negativeLocalScale;
 
-    [Header("抓取物件")]
-    [SerializeField] Player playerScript;
-
     [Header("移動速度")]
     [SerializeField] float moveSpeed = 1.5f;
     [Header("加速倍數")]
     [SerializeField] float speedModifier = 2f;
-    [Header("攻擊距離")]
-    [SerializeField] float attackDistance = 1.5f;
     [Header("追趕距離")]
     [SerializeField] float chaseDistance = 5f;
     [Header("巡邏範圍")]
     [SerializeField] Transform rightWall;
     [SerializeField] Transform leftWall;
-    [Header("停滯時間")]
-    [SerializeField] float stayTime = 3;
 
     [Header("放置圖片")]
     [SerializeField] SpriteRenderer warmIcon;
@@ -37,9 +30,9 @@ public class AIController : MonoBehaviour
 
     private GameObject player;
     private Animator animator;
+    private Player playerScript;
 
     private bool isMoveRight;
-    private float time;
 
     private DirectionType directionType;
     private int randomNumber;
@@ -47,10 +40,9 @@ public class AIController : MonoBehaviour
 
     private void Start()
     {
-        player       = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<Player>();
-        animator     = GetComponent<Animator>();
-
+        animator = GetComponent<Animator>();
 
         randomNumber = Random.Range(0, 2);
 
@@ -62,22 +54,17 @@ public class AIController : MonoBehaviour
         {
             directionType = DirectionType.Left;
         }
+
+        FlipCharactor();
     }
 
     private void Update()
     {
-        if (time >= stayTime && !playerScript.getHit)
+        if (!playerScript.getHit)
         {
             if (IsInChaseRange())
             {
-                if (IsInAttackRange())
-                {
-                    AttackBehaviour();
-                }
-                else
-                {
-                    FollowBehaviour();
-                }
+                FollowBehaviour();
             }
             else
             {
@@ -85,18 +72,26 @@ public class AIController : MonoBehaviour
             }
         }
 
-        UpdateTimer();
+        WarmBehaviour();
     }
 
-    private void UpdateTimer()
+    private void FlipCharactor()
     {
-        time += Time.deltaTime;
-    }
-
-    private void AttackBehaviour()
-    {
-        time = 0;
-        animator.SetBool("IsWalk", false);
+        switch (directionType)
+        {
+            case DirectionType.Right:
+                transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
+                transform.localScale = new Vector2(positiveLocalScale, positiveLocalScale);
+                warmIcon.flipX = false;
+                break;
+            case DirectionType.Left:
+                transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
+                transform.localScale = new Vector2(-negativeLocalScale, positiveLocalScale);
+                warmIcon.flipX = true;
+                break;
+            default:
+                break;
+        }
     }
 
     private void FollowBehaviour()
@@ -122,20 +117,17 @@ public class AIController : MonoBehaviour
 
     private void PatrolBehaviour()
     {
-        switch (directionType)
+        if (isMoveRight)
         {
-            case DirectionType.Right:
-                transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
-                transform.localScale = new Vector2(positiveLocalScale, positiveLocalScale);
-                warmIcon.flipX = false;
-                break;
-            case DirectionType.Left:
-                transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
-                transform.localScale = new Vector2(-negativeLocalScale, positiveLocalScale);
-                warmIcon.flipX = true;
-                break;
-            default:
-                break;
+            transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
+            transform.localScale = new Vector2(positiveLocalScale, positiveLocalScale);
+            warmIcon.flipX = false;
+        }
+        else
+        {
+            transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
+            transform.localScale = new Vector2(-negativeLocalScale, positiveLocalScale);
+            warmIcon.flipX = true;
         }
 
         animator.SetBool("IsWalk", true);
@@ -144,14 +136,21 @@ public class AIController : MonoBehaviour
         warmIcon.sprite = questionIcon;
     }
 
+    private void WarmBehaviour()
+    {
+        if (playerScript.getHit)
+        {
+            animator.SetBool("IsWarm", true);
+        }
+        else
+        {
+            animator.SetBool("IsWarm", false);
+        }
+    }
+
     private bool IsInChaseRange()
     {
         return Vector2.Distance(transform.position, player.transform.position) < chaseDistance;
-    }
-
-    private bool IsInAttackRange()
-    {
-        return Vector2.Distance(transform.position, player.transform.position) < attackDistance;
     }
 
     private bool IsPlayerOnRight()
@@ -171,6 +170,5 @@ public class AIController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
-        Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
 }
