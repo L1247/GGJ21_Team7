@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -474,7 +475,10 @@ public class Player : MonoBehaviour
             sfxSource.PlayOneShot(hitSFX);
         }
 
-        if (hitCount <= 0)
+        var isDead = hitCount <= 0;
+        if (isDead == false)
+            Camera.main?.transform.DOShakePosition(0.5f);
+        if (isDead)
         {
             print("Dead");
             if (GetAudio)
