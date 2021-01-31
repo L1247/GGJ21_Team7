@@ -207,6 +207,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1025601495}
     - target: {fileID: 7093975960319607078, guid: 0428c5b6cf522524780c95a5593ae665, type: 3}
+      propertyPath: winSceneIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7093975960319607078, guid: 0428c5b6cf522524780c95a5593ae665, type: 3}
       propertyPath: flashLightIcon
       value: 
       objectReference: {fileID: 301794159}
