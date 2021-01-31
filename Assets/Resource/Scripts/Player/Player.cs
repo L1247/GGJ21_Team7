@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
             rightKey.GetComponent<Image>().sprite = rightSprite[1];
             if (SceneManager.GetActiveScene().buildIndex == 1)
             {
-                background.sprite = backgroundSprite[1];
+                // background.sprite = backgroundSprite[1];
             }
             else
             {
@@ -367,6 +367,8 @@ public class Player : MonoBehaviour
                     GetBackgroundColor = true;
                     GetComponent<Animator>().SetTrigger("Idle_C");
                     print("GetColor");
+                    var backgroundFade                               = FindObjectOfType<BackgroundFade>();
+                    if (backgroundFade) backgroundFade.StartDissolve = true;
                     // transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[1];
                     Destroy(other.gameObject);
                     break;
