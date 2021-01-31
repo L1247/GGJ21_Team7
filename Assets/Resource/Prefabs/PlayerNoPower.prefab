@@ -297,9 +297,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e0bd1a46a2ad9c3499b53d36f2227ce1, type: 3}
   - {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}
   jumpSFX: {fileID: 8300000, guid: 4f13633ea56974e6dbf63eb99fa6c851, type: 3}
-  hitSFX: {fileID: 8300000, guid: 0d3def65994b84d04b8791e02beb2391, type: 3}
-  powerSFX: {fileID: 8300000, guid: d73b73743ea434d9b98c5c0b04b51e3a, type: 3}
-  deadSFX: {fileID: 8300000, guid: a9e925ca095e74c6781bc9cceafc6743, type: 3}
+  hitSFX: {fileID: 8300000, guid: a9e925ca095e74c6781bc9cceafc6743, type: 3}
+  powerSFX: {fileID: 8300000, guid: a11f29b8ca24247b0bcb1fb9d4169b4b, type: 3}
+  deadSFX: {fileID: 8300000, guid: 2a0632631fb04405fa85f4a5a5d01a4d, type: 3}
   isJump: 0
   isClimbing: 0
   getHit: 0
