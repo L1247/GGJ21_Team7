@@ -268,7 +268,7 @@ MonoBehaviour:
   backgroundSprite:
   - {fileID: 21300000, guid: 26852d7e069351242a9c85baf4c556a8, type: 3}
   - {fileID: 21300000, guid: 270eee10ae972ef4796c318c22a5c6a8, type: 3}
-  - {fileID: 21300000, guid: cdcddb8dff788034bb170a2c73d34d2c, type: 3}
+  - {fileID: 21300000, guid: d6ad67f25846b9b4697ec3e016c94ff6, type: 3}
   upSprite:
   - {fileID: 21300000, guid: 3be84356070c82d40b319f47291882f3, type: 3}
   - {fileID: 21300000, guid: 6dbc9329b726d24439e7903d351edabf, type: 3}
