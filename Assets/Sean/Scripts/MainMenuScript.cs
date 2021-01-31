@@ -65,7 +65,7 @@ public class MainMenuScript : MonoBehaviour
         if (other.name== "GameStartSite")
         {
             Debug.Log($"進入遊戲場景");
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("GameScene 1", UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
     }
 }

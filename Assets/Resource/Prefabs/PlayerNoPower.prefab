@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6536585438058460104}
   - component: {fileID: 5178348078978914610}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Logo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3307801163166741521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 0.018, y: 0.192, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.1}
   m_Children: []
   m_Father: {fileID: 7520636754999467237}
   m_RootOrder: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bab375bdda5c00d4bbdfed666a2350c0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0ef24477711712b4cb87272d97b82b75, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 4302495910035130936}
   - component: {fileID: -3966505217141990611}
   m_Layer: 0
-  m_Name: PlayerInitialize
+  m_Name: PlayerNoPower
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whichSceneToLoad: 0
+  winSceneIndex: 0
   jumpForce: 8.5
   runSpeed: 8
   hitBackForce: 10
@@ -244,7 +245,6 @@ MonoBehaviour:
   sfxSource: {fileID: 0}
   audioManager: {fileID: 0}
   nextLevelPosition: {fileID: 0}
-  spawnPoint: {fileID: 0}
   background: {fileID: 0}
   flashLight: {fileID: 8620900023117721927}
   logoIcon: {fileID: 9180306261582979149}
@@ -288,11 +288,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7c6afa757192b774590282271c2a7ccc, type: 3}
   - {fileID: 21300000, guid: efab7ceaed20e5a4283677014de0cdf2, type: 3}
   restartSprite:
-  - {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}
-  - {fileID: 21300000, guid: e0bd1a46a2ad9c3499b53d36f2227ce1, type: 3}
+  - {fileID: 21300000, guid: b4a8997e1b4283348becade35f26d3bf, type: 3}
+  - {fileID: 21300000, guid: b4a8997e1b4283348becade35f26d3bf, type: 3}
   flashLightSprite:
-  - {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}
-  - {fileID: 21300000, guid: e0bd1a46a2ad9c3499b53d36f2227ce1, type: 3}
+  - {fileID: 21300000, guid: 27cffb0ac9041a0438ae7ca51db8421e, type: 3}
+  - {fileID: 21300000, guid: 27cffb0ac9041a0438ae7ca51db8421e, type: 3}
   healthStar:
   - {fileID: 21300000, guid: e0bd1a46a2ad9c3499b53d36f2227ce1, type: 3}
   - {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}
@@ -303,7 +303,6 @@ MonoBehaviour:
   isJump: 0
   isClimbing: 0
   getHit: 0
-  isGetLogo: 0
   getLeftKey: 0
   getJump: 0
   getClimb: 0
@@ -312,6 +311,7 @@ MonoBehaviour:
   getBackgroundColor: 0
   getRestart: 0
   getLight: 0
+  isGetLogo: 0
 --- !u!114 &4302495910035130919
 MonoBehaviour:
   m_ObjectHideFlags: 0
