@@ -381,7 +381,7 @@ public class Player : MonoBehaviour
                     break;
                 case ItemType.Teleport:
                     print("Teleport to : " + whichSceneToLoad+1);
-                    TeleportToScene(whichSceneToLoad+1);
+                    StartCoroutine(TeleportToScene(whichSceneToLoad+1));
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Icon:
