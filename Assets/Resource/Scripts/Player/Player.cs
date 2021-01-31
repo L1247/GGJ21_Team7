@@ -8,7 +8,9 @@ using Object = UnityEngine.Object;
 
 public class Player : MonoBehaviour
 {
-    [Header("行動參數")] [SerializeField] private int whichSceneToLoad;
+    [Header("行動參數")]
+    [SerializeField] private int whichSceneToLoad;
+    [SerializeField] private int winSceneIndex;
     public float jumpForce;
     public float runSpeed;
     [SerializeField] private float hitBackForce;
@@ -115,6 +117,7 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool getLight;
+
 
 
     public bool GetLight
@@ -512,5 +515,6 @@ public class Player : MonoBehaviour
     {
         print("Win");
         yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(winSceneIndex);
     }
 }
