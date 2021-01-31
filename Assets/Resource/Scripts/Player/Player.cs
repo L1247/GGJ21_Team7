@@ -380,7 +380,7 @@ public class Player : MonoBehaviour
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Teleport:
-                    print("Teleport to : " + nextLevelPosition.position);
+                    print("Teleport to : " + whichSceneToLoad+1);
                     TeleportToScene(whichSceneToLoad+1);
                     Destroy(other.gameObject);
                     break;
