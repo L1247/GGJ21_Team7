@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndSceneScript : MonoBehaviour
 {
@@ -8,18 +9,25 @@ public class EndSceneScript : MonoBehaviour
     Animator endAnimator;
     [SerializeField]
     GameObject objLogo;
+    [SerializeField]
+    Button btnStart;
+    [SerializeField]
+    Button btnEnd;
 
     Vector2 v2Scale;
     Vector2 v2AddForce;
     float fSpeed=10;
     bool isGameEnd;
     bool isOnFloor;
+    bool isClickRe;
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log($"結束場景，Speed:{fSpeed}");
         v2Scale = transform.localScale;
         v2AddForce.y = 10;
+        btnStart.onClick.AddListener(() => ReStart());
+        btnEnd.onClick.AddListener(()=> GameEnd());
     }
 
     // Update is called once per frame
@@ -27,6 +35,7 @@ public class EndSceneScript : MonoBehaviour
     {
         PlayerMove();
         AnimatorRun();
+        ReGame();
     }
     void AnimatorRun()
     {
@@ -55,8 +64,32 @@ public class EndSceneScript : MonoBehaviour
             transform.localScale = v2Scale;
             if (Input.GetKeyDown(KeyCode.Space) && isOnFloor)
             {
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero; //跳躍前清空速度  (velocity 速度)
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero; //跳躍前清空速度
                 GetComponent<Rigidbody2D>().AddForce(v2AddForce, ForceMode2D.Impulse);
+            }
+        }
+    }
+    void ReStart()
+    {
+        isClickRe = true;
+    }
+    void GameEnd()
+    {
+        Debug.Log($"遊戲結束");
+        Application.Quit();
+    }
+    void ReGame()
+    {
+        if (isClickRe)
+        {
+            endAnimator.SetTrigger("ReGame");
+            if (endAnimator.GetCurrentAnimatorStateInfo(0).IsName("ReAnimation"))
+            {
+                Debug.Log($"播放LOGO結束動畫");
+            }
+            else
+            {
+                StartCoroutine(coReMainScene());
             }
         }
     }
@@ -80,5 +113,10 @@ public class EndSceneScript : MonoBehaviour
             Debug.Log($"離開地面");
             isOnFloor = false;
         }
+    }
+    IEnumerator coReMainScene()
+    {
+        yield return new WaitForSeconds(2.5f);
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainMenuScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 }
