@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -381,8 +382,8 @@ public class Player : MonoBehaviour
                     break;
                 case ItemType.Teleport:
                     print("Teleport to : " + whichSceneToLoad+1);
-                    TeleportToScene(whichSceneToLoad+1);
-                    Destroy(other.gameObject);
+                    StartCoroutine(TeleportToScene(whichSceneToLoad+1));
+                    other.GetComponent<BoxCollider2D>().isTrigger = false;
                     break;
                 case ItemType.Icon:
                     isGetLogo = true;
@@ -392,7 +393,9 @@ public class Player : MonoBehaviour
                     if (isGetLogo)
                     {
                         StartCoroutine(TeleportToScene(whichSceneToLoad+1));
+                        other.GetComponent<BoxCollider2D>().isTrigger = false;
                     }
+
                     break;
                 default:
                     break;
@@ -472,7 +475,10 @@ public class Player : MonoBehaviour
             sfxSource.PlayOneShot(hitSFX);
         }
 
-        if (hitCount <= 0)
+        var isDead = hitCount <= 0;
+        if (isDead == false)
+            Camera.main?.transform.DOShakePosition(0.5f);
+        if (isDead)
         {
             print("Dead");
             if (GetAudio)
