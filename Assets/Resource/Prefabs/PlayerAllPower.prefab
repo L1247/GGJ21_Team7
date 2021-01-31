@@ -64,6 +64,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2497974896917773579, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4302495909961000655, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.38032073
@@ -95,6 +99,10 @@ PrefabInstance:
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: jumpForce
       value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: flashLight
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4302495910035130916, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: getLeftKey
@@ -195,6 +203,10 @@ PrefabInstance:
     - target: {fileID: 4302495911217831850, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520636754999467237, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e33021d2f38ab234d84d7f300b95bd18, type: 3}

@@ -14,16 +14,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float hitBackForce;
     [SerializeField] private int hitCount;
 
-    [Header("生成物")]
-    [SerializeField] private GameObject flashLightPrefabe;
-
     [Header("掛載物件")] [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] AudioSource sfxSource;
     [SerializeField] AudioSource audioManager;
     [SerializeField] private Transform nextLevelPosition;
-    [SerializeField] private Transform spawnPoint;
     [SerializeField] private SpriteRenderer background;
     public FlashLight flashLight;
+    public GameObject logoIcon;
 
     [Header("獲得能力UI")] [SerializeField] private GameObject upKey;
     [SerializeField] private GameObject downKey;
@@ -59,6 +56,7 @@ public class Player : MonoBehaviour
     [Header("判斷腳色狀態")] public bool isJump;
     public bool isClimbing;
     public bool getHit;
+    public bool isGetLogo;
 
     [Header("獲得能力")] [SerializeField] bool getLeftKey;
 
@@ -119,7 +117,6 @@ public class Player : MonoBehaviour
     [SerializeField] private bool getLight;
 
 
-
     public bool GetLight
     {
         get => getLight;
@@ -141,45 +138,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void FullPowerPlayer()
-    {
-        sfxSource.enabled = true;
-        audioManager.enabled = true;
-        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[1];
-        background.sprite = backgroundSprite[1];
-        LeftKey = true;
-        GetAnimator = true;
-        Jump = true;
-        Climb = true;
-        GetBackgroundColor = true;
-        GetAudio = true;
-        GetRestart = true;
-        GetLight = false;
-        // rightKey.SetActive(true);
-        // upKey.SetActive(true);
-        // downKey.SetActive(true);
-        // leftKey.SetActive(true);
-        // spaceKey.SetActive(true);
-        // audioIcon.SetActive(true);
-        // restartIcon.SetActive(true);
-        // flashLightIcon.SetActive(true);
-    }
-
-    private void NoPowerPlayer()
-    {
-        sfxSource.enabled = false;
-        audioManager.enabled = false;
-        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[0];
-        background.sprite = backgroundSprite[0];
-        rightKey.SetActive(true);
-        LeftKey = false;
-        Jump = false;
-        Climb = false;
-        GetRestart = false;
-        GetBackgroundColor = false;
-        GetAudio = false;
-        GetLight = false;
-    }
 
     // Update is called once per frame
     void Update()
@@ -303,22 +261,63 @@ public class Player : MonoBehaviour
         else
         {
             flashLightIcon.SetActive(false);
+            flashLight.gameObject.SetActive(false);
         }
+
+        logoIcon.SetActive(isGetLogo);
+    }
+
+
+    private void FullPowerPlayer()
+    {
+        sfxSource.enabled = true;
+        audioManager.enabled = true;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[1];
+        background.sprite = backgroundSprite[1];
+        LeftKey = true;
+        GetAnimator = true;
+        Jump = true;
+        Climb = true;
+        GetBackgroundColor = true;
+        GetAudio = true;
+        GetRestart = true;
+        GetLight = false;
+        // rightKey.SetActive(true);
+        // upKey.SetActive(true);
+        // downKey.SetActive(true);
+        // leftKey.SetActive(true);
+        // spaceKey.SetActive(true);
+        // audioIcon.SetActive(true);
+        // restartIcon.SetActive(true);
+        // flashLightIcon.SetActive(true);
+    }
+
+    private void NoPowerPlayer()
+    {
+        sfxSource.enabled = false;
+        audioManager.enabled = false;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = playerSprite[0];
+        background.sprite = backgroundSprite[0];
+        rightKey.SetActive(true);
+        LeftKey = false;
+        Jump = false;
+        Climb = false;
+        GetRestart = false;
+        GetBackgroundColor = false;
+        GetAudio = false;
+        GetLight = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Stair")
+        if (other.tag == "Stair" && Climb && !isClimbing)
         {
-            if (Climb && !isClimbing)
+            print("Climbing");
+            // transform.position = other.transform.position;
+            isClimbing = true;
+            if (GetLight)
             {
-                print("Climbing");
-                // transform.position = other.transform.position;
-                isClimbing = true;
-                if (GetLight)
-                {
-                    flashLight.isTurnOff = true;
-                }
+                flashLight.isTurnOff = true;
             }
         }
 
@@ -369,10 +368,6 @@ public class Player : MonoBehaviour
                 case ItemType.Light:
                     print("GetFlashLight");
                     GetLight = true;
-                    GameObject flash = Instantiate(flashLightPrefabe,transform);
-                    flash.transform.localPosition = new Vector3(1.17f, -0.22f, 0);
-                    flash.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-                    flashLight = flash.GetComponent<FlashLight>();
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Restart:
@@ -386,7 +381,7 @@ public class Player : MonoBehaviour
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Icon:
-
+                    isGetLogo = true;
                     Destroy(other.gameObject);
                     break;
                 default:
@@ -398,6 +393,11 @@ public class Player : MonoBehaviour
                 PlayPowerSFX();
             }
         }
+
+        if (isGetLogo && other.name == " ")
+        {
+            StartCoroutine(WinGame());
+        }
     }
 
 
@@ -407,14 +407,9 @@ public class Player : MonoBehaviour
         {
             isClimbing = false;
             print("StopClimbing");
-            if (other.transform.position.y > transform.position.y)
-            {
-                _rigidbody2D.velocity = new Vector2(0, -jumpForce);
-            }
-            else
-            {
-                _rigidbody2D.velocity = new Vector2(0, jumpForce);
-            }
+            _rigidbody2D.velocity = other.transform.position.y > transform.position.y
+                ? new Vector2(0, -jumpForce)
+                : new Vector2(0, jumpForce);
         }
     }
 
@@ -444,14 +439,7 @@ public class Player : MonoBehaviour
         getHit = true;
         if (GetAnimator)
         {
-            if (!GetBackgroundColor)
-            {
-                GetComponent<Animator>().SetTrigger("Hurt");
-            }
-            else
-            {
-                GetComponent<Animator>().SetTrigger("Hurt_C");
-            }
+            GetComponent<Animator>().SetTrigger(!GetBackgroundColor ? "Hurt" : "Hurt_C");
         }
 
         if (other.transform.position.x > transform.position.x)
@@ -520,7 +508,9 @@ public class Player : MonoBehaviour
         getHit = false;
     }
 
-    private void WinGame()
+    IEnumerator WinGame()
     {
+        print("Win");
+        yield return new WaitForSeconds(1f);
     }
 }
