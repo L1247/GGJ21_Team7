@@ -288,11 +288,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7c6afa757192b774590282271c2a7ccc, type: 3}
   - {fileID: 21300000, guid: efab7ceaed20e5a4283677014de0cdf2, type: 3}
   restartSprite:
-  - {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}
-  - {fileID: 21300000, guid: e0bd1a46a2ad9c3499b53d36f2227ce1, type: 3}
+  - {fileID: 21300000, guid: b4a8997e1b4283348becade35f26d3bf, type: 3}
+  - {fileID: 21300000, guid: b4a8997e1b4283348becade35f26d3bf, type: 3}
   flashLightSprite:
-  - {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}
-  - {fileID: 21300000, guid: e0bd1a46a2ad9c3499b53d36f2227ce1, type: 3}
+  - {fileID: 21300000, guid: 27cffb0ac9041a0438ae7ca51db8421e, type: 3}
+  - {fileID: 21300000, guid: 27cffb0ac9041a0438ae7ca51db8421e, type: 3}
   healthStar:
   - {fileID: 21300000, guid: e0bd1a46a2ad9c3499b53d36f2227ce1, type: 3}
   - {fileID: 21300000, guid: 6482c24154de3a84db1f3a3bee9dd5c7, type: 3}

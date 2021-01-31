@@ -380,13 +380,19 @@ public class Player : MonoBehaviour
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Teleport:
-                    print("Teleport to : " + nextLevelPosition.position);
+                    print("Teleport to : " + whichSceneToLoad+1);
                     TeleportToScene(whichSceneToLoad+1);
                     Destroy(other.gameObject);
                     break;
                 case ItemType.Icon:
                     isGetLogo = true;
                     Destroy(other.gameObject);
+                    break;
+                case ItemType.Level2Teleport:
+                    if (isGetLogo)
+                    {
+                        StartCoroutine(TeleportToScene(whichSceneToLoad+1));
+                    }
                     break;
                 default:
                     break;
@@ -496,8 +502,9 @@ public class Player : MonoBehaviour
         sfxSource.PlayOneShot(powerSFX);
     }
 
-    public void TeleportToScene(int index)
+    IEnumerator TeleportToScene(int index)
     {
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(index);
     }
 
